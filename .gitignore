@@ -3,3 +3,14 @@
 # ignore autosave/backup files
 *~
 \#*\#
+
+# ignore log files
+*.log
+
+# ignore EPICS stuff
+O.*/
+Makefile*
+base*
+
+#ignore unnecessary directory
+test/
