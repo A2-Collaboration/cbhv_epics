@@ -1,0 +1,5 @@
+# add files here which shall be ignored by git
+
+# ignore autosave/backup files
+*~
+\#*\#

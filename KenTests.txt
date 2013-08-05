@@ -1,0 +1,238 @@
+#This file is in /home/epics/epics/modules/synApps_5_6/support/stream-2-5-1/streamDevice/streamApp/KensTests.txt
+Mostly following this:
+http://epics.web.psi.ch/software/streamdevice/doc/index.html
+
+
+
+#Get 3 separate windows on  a2slowcontrol1 like this:
+#ssh to a2slowcontrol1
+
+>ssh -Y epics@a2slowcontrol1
+>cd /home/epics/epics/modules/synApps_5_6/support/stream-2-5-1/streamDevice/streamApp
+
+
+This is just to test that we can read write basic commands to the box using EPICS.
+
+1. Edit the file test_kl.cmd to reflect the ip address of the device. Port should be 23 (default telnet port).
+The line which loads the database is dbLoadRecords "test.db","P=TEST"
+
+2. The records for the device are set up in test.db (don't worry about this for now.) 
+other than to note that $(P) is a variable which is provided by the line dbLoadRecords "test.db","P=TEST" above.
+Hence, the records will be referred to as TEST:cmd ... etc.
+
+3. For starters we'll just telnet to the box and test that we get something useful.
+
+[epics@a2slowcontrol1 streamApp]$ telnet 10.32.161.119
+Trying 10.32.161.119...
+Connected to 10.32.161.119.
+Escape character is '^]'.
+Und, los geht's...!!! ("help" hilft :-))
+> 
+
+> help
+Commands:
+
+arp
+stats
+ifconfig
+eemem
+reset
+VoltageRange
+read_config
+READTEMP
+read_adc
+myMAC
+SetVpmX
+SetVpmF
+time
+ntp
+dns
+temp
+> 
+
+#I want to find a command that results in a single line response for starting. 
+
+> myMAC
+MAC: 00:60:35:17:a5:26
+
+#That's a good one to try for starters.
+#we exit from the telnet session.
+
+##NOTE the telnet exits after a short time if there is no communication (Oliver says ~80s)
+
+
+##now we try to send this command with epics
+##According to the test.readme file, the TEST:info command should send a command and read the response.
+##Run the epics driver like this:
+
+>O.linux-x86_64/streamApp test_kl.cmd
+dbLoadDatabase "O.Common/streamApp.dbd"
+streamApp_registerRecordDeviceDriver
+#streamApp
+epicsEnvSet "STREAM_PROTOCOL_PATH", "."
+drvAsynIPPortConfigure "terminal", "10.32.161.119:23"
+dbLoadRecords "test.db","P=TEST"
+iocInit
+Starting iocInit
+############################################################################
+## EPICS R3.14.12.2 $Date: Mon 2011-12-12 14:09:32 -0600$
+## EPICS Base built Dec 12 2012
+############################################################################
+cas warning: Configured TCP port was unavailable.
+cas warning: Using dynamically assigned TCP port 32826,
+cas warning: but now two or more servers share the same UDP port.
+cas warning: Depending on your IP kernel this server may not be
+cas warning: reachable with UDP unicast (a host's IP in EPICS_CA_ADDR_LIST)
+iocRun: All initialization complete
+var streamDebug 1
+epics> 
+
+
+##in a different window, send the command like this:
+[epics@a2slowcontrol1 streamApp]$ caput TEST:info myMAC
+Old : TEST:info                      
+New : TEST:info                      myMAC
+
+
+##and read back the result like this:
+[epics@a2slowcontrol1 streamApp]$ caget TEST:info
+TEST:info                      MAC: 00:60:35:17:a5:26
+
+
+#That's good.
+
+#now at the epics> prompt type exit, since it will time out anyway:
+epics>exit
+
+#Now we make a simple gui in the old medm style.
+
+1. Start medm
+   [epics@a2slowcontrol1 streamApp]$ medm &
+2. Should pop up a window in edit mode
+3. select file->new - this pops up a window which will be the GUI - drag to the size you want.
+4. select palettes->objects - this pops up a window with widgets to choose:
+5. Select Controllers / text entry and then drag the mouse on the GUI to make a text entry box.
+6. In the Resource pallette - Control Channel box, type TEST:info (and hit return).
+7. Use graphics - text to make a label above it "Command"
+8. Below in make a similar monitor - text window with "Response" label. 
+   in Readback Channel box, type TEST:info (and hit return).
+9. in the original window hit the execute button. Now your GUI is live. 
+   However, to make it useful you need to start epics again:
+
+   >O.linux-x86_64/streamApp test_kl.cmd
+
+10. Now in the medm GUI, in the Command entry, type myMAC
+    The response should be MAC: 00:60:35:17:a5:26
+
+    Try help - you will only get the 1st line of the help menue, 
+    since this currently only deals with 1 line responses.
+
+11. Save your lovely gui (go into edit mode, then save as). I saved mine as
+    test_kl.adl
+
+12. Try running it directly like this:
+    medm -x test_kl.adl
+
+    if the boxes are white the epics driver is not running, so start it.
+
+
+
+This demonstrates the functionality.
+Now here's the list of thing to do:
+
+Decide which of the telnet commands we want to implement in EPICS.
+Figure out how to do this.
+
+I'll start with a command to set the voltage, by duplicating the info command.
+
+#Use telnet to figure out how so read voltages
+> read_adc floats_csv 1
+01.08.2013 11:54:20,1500.037
+
+Let's try and implement this for starters.
+
+Make a database entry in test.db  like this:
+record (stringout, "$(P):read_voltage")
+{
+    field (DTYP, "stream")
+    field (OUT,  "@test.proto read_voltage terminal")
+}
+
+This will use the protocol defined in test.proto
+Make a corresponding protocol to handle the input and output for reading voltage using 
+read_adc floats_csv 1
+
+read_voltage {
+    out "read_adc floats_csv %s";
+    in "%30c";
+}
+
+This should allow a command like:
+caput TEST:read_voltage <channel>
+
+and respond with something like this
+01.08.2013 11:54:20,1500.037
+
+Seems to work:
+
+[epics@a2slowcontrol1 streamApp]$ caput TEST:read_voltage 4
+Old : TEST:read_voltage              
+New : TEST:read_voltage              4
+[epics@a2slowcontrol1 streamApp]$ caget TEST:read_voltage 
+TEST:read_voltage              01.01.1900 00:07:21,1499.858
+[epics@a2slowcontrol1 streamApp]$ caput TEST:read_voltage 3
+Old : TEST:read_voltage              01.01.1900 00:07:21,1499.858
+New : TEST:read_voltage              3
+[epics@a2slowcontrol1 streamApp]$ caget TEST:read_voltage 
+TEST:read_voltage              01.01.1900 00:07:36,1499.831
+
+
+Now want to parse the response.
+Change the in line to:
+read_voltage {
+    out "read_adc floats_csv %s";
+    in "%20c%s";
+}
+
+
+
+
+[epics@a2slowcontrol1 streamApp]$ caput TEST:read_voltage 3
+
+[epics@a2slowcontrol1 streamApp]$ caget TEST:read_voltage
+TEST:read_voltage              1499.718
+
+
+Seems to work.
+
+
+
+Things to do.
+
+1. Copy and the following files to something new and repeat the above steps with the new file.
+test_kl.cmd 
+test.db
+test.proto
+
+2. The current read command needs to be fixed to read level, channel.
+
+3. Add a set_voltage command.
+
+4. cut all the rubbish out of test.db and only have a couple of required records relating to voltage.
+
+5. figure out how to make the proto function write the command based on channel name etc.
+eg. translate 
+caput TEST:1 5
+to read_adc floats_csv 1 5
+
+6. Multiple boards in the one softIOC, with different addresses. Eg named TEST1, TEST2 ... etc.
+6. Figure out how to translate (or have additional channels) from CB numbers to board,level,channel
+
+So that caput TEST1:2 5
+Will issue
+read_adc floats_csv 2 5 for the correct board.
+
+Figure out what channels you need and what a gui should look like. 
+
+etc.
+
