@@ -13,4 +13,4 @@ Makefile*
 base*
 
 #ignore unnecessary directory
-test/
+/tests
