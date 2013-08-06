@@ -1,12 +1,12 @@
 
 file {
-	name="cbhv.adl"
+	name="/home/epics/epics/modules/synApps_5_6/support/stream-2-5-1/streamDevice/streamApp/cbhv.adl"
 	version=030105
 }
 display {
 	object {
-		x=2
-		y=50
+		x=815
+		y=1513
 		width=400
 		height=400
 	}
@@ -145,10 +145,10 @@ text {
 }
 "text update" {
 	object {
-		x=99
-		y=217
-		width=154
-		height=25
+		x=98
+		y=182
+		width=158
+		height=21
 	}
 	monitor {
 		chan="TEST:read_voltage"
@@ -157,18 +157,5 @@ text {
 	}
 	format="string"
 	limits {
-	}
-}
-menu {
-	object {
-		x=103
-		y=253
-		width=89
-		height=128
-	}
-	control {
-		chan="TEST:read_voltage"
-		clr=14
-		bclr=4
 	}
 }

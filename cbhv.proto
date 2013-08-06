@@ -29,6 +29,11 @@ read_voltage {
     in "%20c%s";
 }
 set_voltage {
-	    out "SetVpmF %s";
-	    in "%39c";
+    out "SetVpmF %s";
 }
+set_specvolt{
+    out "SetVpmF \$1 \$2 %s";
+}
+
+
+	

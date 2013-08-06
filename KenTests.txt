@@ -65,7 +65,7 @@ MAC: 00:60:35:17:a5:26
 ##According to the test.readme file, the TEST:info command should send a command and read the response.
 ##Run the epics driver like this:
 
->O.linux-x86_64/streamApp test_kl.cmd
+./O.linux-x86_64/streamApp test_kl.cmd
 dbLoadDatabase "O.Common/streamApp.dbd"
 streamApp_registerRecordDeviceDriver
 #streamApp
