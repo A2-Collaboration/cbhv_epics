@@ -34,6 +34,11 @@ set_voltage {
 set_specvolt{
     out "SetVpmF \$1 \$2 %s";
 }
-
+setncheck{
+    out "SetVpmF \$1 \$2 %s";
+    wait 5000;
+    out "read_adc floats_csv \$3 \$4";
+    in "%20c%s"
+}
 
 	

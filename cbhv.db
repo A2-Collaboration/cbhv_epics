@@ -146,3 +146,8 @@ record (stringout, "$(P):set_specvolt")
     field (DTYP, "stream")
     field (OUT, "@cbhv.proto set_specvolt(1,1) terminal")
 }
+record (stringout, "$(P):setncheck")
+{
+    field (DTYP, "stream")
+    field (OUT, "@cbhv.proto setncheck(1,1,1,1) terminal")
+}

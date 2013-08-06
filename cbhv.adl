@@ -159,3 +159,47 @@ text {
 	limits {
 	}
 }
+"text entry" {
+	object {
+		x=107
+		y=241
+		width=159
+		height=38
+	}
+	control {
+		chan="TEST:setncheck"
+		clr=14
+		bclr=4
+	}
+	format="string"
+	limits {
+	}
+}
+text {
+	object {
+		x=111
+		y=222
+		width=124
+		height=11
+	}
+	"basic attribute" {
+		clr=14
+	}
+	textix="Set and Check"
+}
+"text update" {
+	object {
+		x=110
+		y=303
+		width=153
+		height=30
+	}
+	monitor {
+		chan="TEST:setncheck"
+		clr=14
+		bclr=4
+	}
+	format="string"
+	limits {
+	}
+}
