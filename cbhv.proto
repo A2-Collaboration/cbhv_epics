@@ -38,7 +38,9 @@ setncheck{
     out "SetVpmF \$1 \$2 %s";
     wait 5000;
     out "read_adc floats_csv \$3 \$4";
-    in "%20c%s"
+    in "%20c%s";
 }
-
-	
+repeatcheck{
+    out "read_adc floats_csv \$1 \$2";
+    in "%20c%s";
+}	

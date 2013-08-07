@@ -14,3 +14,6 @@ base*
 
 #ignore unnecessary directory
 /tests
+
+#ignore adl backup
+cbhv_BAK.adl

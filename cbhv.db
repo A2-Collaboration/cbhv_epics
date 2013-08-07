@@ -151,3 +151,39 @@ record (stringout, "$(P):setncheck")
     field (DTYP, "stream")
     field (OUT, "@cbhv.proto setncheck(1,1,1,1) terminal")
 }
+record (stringout, "$(P):repeatcheck")
+{
+    field (DTYP, "stream")
+    field (OUT, "@cbhv.proto repeatcheck(0,0) terminal")
+    field (SCAN, "5 second")
+}
+record (stringout, "$(P):repeatcheck11")
+{
+    field (DTYP, "stream")
+    field (OUT, "@cbhv.proto repeatcheck(1,1)  terminal")
+    field (SCAN, "5 second")
+}
+record (stringout, "$(P):repeatcheck12")
+{
+    field (DTYP, "stream")
+    field (OUT, "@cbhv.proto repeatcheck(1,2)  terminal")
+    field (SCAN, "5 second")
+}
+record (stringout, "$(P):repeatcheck13")
+{
+    field (DTYP, "stream")
+    field (OUT, "@cbhv.proto repeatcheck(1,3)  terminal")
+    field (SCAN, "5 second")
+}
+record (stringout, "$(P):repeatcheck14")
+{
+    field (DTYP, "stream")
+    field (OUT, "@cbhv.proto repeatcheck(1,4)  terminal")
+    field (SCAN, "5 second")
+}
+record (stringout, "$(P):repeatcheck15")
+{
+    field (DTYP, "stream")
+    field (OUT, "@cbhv.proto repeatcheck(1,5)  terminal")
+    field (SCAN, "5 second")
+}
