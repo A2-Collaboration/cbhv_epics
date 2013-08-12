@@ -4,7 +4,7 @@ print "hello kph"
 
 level = 0
 max = 0
-volt = 1300
+volt = 1400
 
 werte = []
 

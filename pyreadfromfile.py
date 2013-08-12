@@ -1,22 +1,17 @@
 #! /usr/bin/python
+#import epics
+import time
 
-gelesen = []
+f = open ("cbhv-dummywerte", 'r')
 
-f = open ("cbhvtestwerte.txt", "r")
+werte=f.readlines()
 
-count = 0
-testcount = 0
-max = len(f.readline())
-print max
-line = f.readline(count)
-
-if not line==0:
-    line = f.readline(count)
-    print line
-    gelesen.append(line)
 f.close
 
-# while (testcount < max):
-# print (gelesen)
-         # testcount = testcount + 1
+count = 0
+
+while (count<5):
+	print werte[count]
+	count = count + 1
+	time.sleep(5)
 
