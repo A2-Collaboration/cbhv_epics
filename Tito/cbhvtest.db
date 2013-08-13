@@ -1,0 +1,56 @@
+#srecord (stringout, "$(P):cmd")
+#{
+#    field (DTYP, "stream")
+#    field (OUT,  "@$(PROTO) command termBox$(BOXNO)")
+#    field (VAL, "")
+#}
+#record (stringout, "$(P):info")
+#{
+#    field (DTYP, "stream")
+#    field (OUT,  "@$(PROTO) info termBox$(BOXNO)")
+#}
+#record (stringout, "$(P):request")
+#{
+#    field (DTYP, "stream")
+#    field (OUT,  "@$(PROTO) request($(P):reply.VAL) termBox$(BOXNO)")
+#}
+#record (waveform, "$(P):spybin")
+#{
+#    field (DTYP, "stream")
+#    field (INP,  "@$(PROTO) spybin termBox$(BOXNO)")
+#    field (FTVL, "CHAR")
+#    field (NELM, "2000")
+#    field (SCAN, "I/O Intr")
+#}
+record (stringout, "$(P):Box:$(BOXNO):read_voltage")
+{
+    field (DTYP, "stream")
+    field (OUT,  "@$(PROTO) read_voltage termBox$(BOXNO)")
+}
+record (stringout, "$(P):Box:$(BOXNO):set_voltage")
+{
+    field (DTYP, "stream")
+    field (OUT, "@$(PROTO) set_voltage termBox$(BOXNO)")
+}
+#record (stringout, "$(P):set_specvolt")
+#{
+#    field (DTYP, "stream")
+#    field (OUT, "@$(PROTO) set_specvolt(1,1) termBox$(BOXNO)")
+#}
+#record (stringout, "$(P):setncheck")
+#{
+#    field (DTYP, "stream")
+#    field (OUT, "@$(PROTO) setncheck(1,1,1,1) termBox$(BOXNO)")
+#}
+#record (stringout, "$(P):repeatcheck")
+#{
+#    field (DTYP, "stream")
+#    field (OUT, "@$(PROTO) repeatcheck(0,0) termBox$(BOXNO)")
+#    field (SCAN, "5 second")
+#}
+#record (stringout, "$(P):repeatcheck11")
+#{
+#    field (DTYP, "stream")
+#    field (OUT, "@$(PROTO) repeatcheck(1,1)  termBox$(BOXNO)")
+#    field (SCAN, "5 second")
+#}
