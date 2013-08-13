@@ -1,5 +1,5 @@
 #!/bin/bash
-for i in {19..19}
+for i in {01..18}
 do
    ./cbhvset.py $i $@ &
 done
