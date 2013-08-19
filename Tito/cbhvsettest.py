@@ -10,8 +10,6 @@ import sys
 
 #f.close
 
-level = 0
-count = 0
 
 if len(sys.argv) < 3:
 
@@ -21,9 +19,13 @@ if len(sys.argv) < 3:
 else:
 
 	box = sys.argv[1]
-	setvolt = sys.argv[2]	
+	setvolt = sys.argv[2]
+
+count = 0	
 
 from epics import caput, caget
+
+level = 0
 
 while (level < 5):
 
@@ -32,6 +34,7 @@ while (level < 5):
 	while (channel < 8):
 		
 		caput("CB:HV:Box:%s:set_voltage" % box, "%d %d %s" % (level, channel, setvolt)) 
+		print setvolt
 		time.sleep(5)
 		caput("CB:HV:Box:%s:read_voltage" % box, "%d %d" % (level, channel))
 		time.sleep(1)
@@ -42,6 +45,7 @@ while (level < 5):
 		voltstring = "%s %d %d %s => %s" % (box, level, channel, setvolt, realvolt)
 		print voltstring
 		channel = channel + 1
-		count = count +1
 
 	level = level + 1
+# with open("count.txt", "a") as myfile:
+#		myfile.write("round %d using %s Volt completed\n" % (count, setvolt))

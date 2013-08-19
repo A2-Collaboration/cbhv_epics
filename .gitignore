@@ -14,6 +14,10 @@ base*
 
 #ignore unnecessary directory
 /tests
-
+/Tito/vlinac
 #ignore adl backup
 cbhv_BAK.adl
+
+#ignore files just made for testing things
+
+Tito/count.txt

@@ -25,6 +25,8 @@ else:
 
 from epics import caput, caget
 
+channel = 0	
+		
 while (level < 5):
 
 	channel = 0	

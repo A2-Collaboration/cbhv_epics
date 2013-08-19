@@ -27,6 +27,9 @@ read_voltage {
     connect 1000;
     out "read_adc floats_csv %s";
     in "%20c%s";
+
+# line connect 1000; needed otherwise return value is input value instead of desired voltage due to slow box
+
 }
 set_voltage {
     out "SetVpmF %s";
