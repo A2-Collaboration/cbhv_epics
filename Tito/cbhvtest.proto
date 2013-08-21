@@ -1,7 +1,7 @@
-terminator = CR LF;
-readtimeout = 1000;
+terminator = CR;
+readtimeout = 7000;
 pollperiod = 10;
-replytimeout = 1000;
+replytimeout = 7000;
 command {
     out "%s";
 }
@@ -24,13 +24,10 @@ spybin {
     in "%r";
 }
 read_voltage {
-    connect 1000;
-    out "read_adc floats_csv %s";
+    out "read_adc floats_csv \$1 \$2";
     in "%20c%s";
-
-# line connect 1000; needed otherwise return value is input value instead of desired voltage due to slow box
-
 }
+
 set_voltage {
     out "SetVpmF %s";
 }

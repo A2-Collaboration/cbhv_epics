@@ -1,0 +1,6 @@
+file "cbhvtest.db"
+{
+	pattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO}
+		{cbhvtest.proto, CB:HV, 19, 1, 1}
+		{cbhvtest.proto, CB:HV, 19, 1, 2}
+}
