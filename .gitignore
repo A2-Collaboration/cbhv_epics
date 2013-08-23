@@ -19,6 +19,7 @@ base*
 cbhv_BAK.adl
 /Oli
 
-#ignore files just made for testing things
+#ignore files just made for testing and ohter things
 
 Tito/count.txt
+Tito/sender.py

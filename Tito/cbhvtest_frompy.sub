@@ -1,0 +1,4 @@
+file "cbhvtest.db" 
+{
+	pattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO, ELEMENTNO}
+}

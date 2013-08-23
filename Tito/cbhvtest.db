@@ -26,20 +26,36 @@
 #{
 #    field (DTYP, "stream")
 #    field (OUT,  "@$(PROTO) read_voltage termBox$(BOXNO)")
-#}
-
-record (stringout, "$(P):Box:$(BOXNO):set_voltage")
+#} 
+#
+record (stringout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt")
 {
     field (DTYP, "stream")
-    field (OUT,  "@$(PROTO) set_voltage termBox$(BOXNO)")
+    field (OUT,  "@$(PROTO) set_voltage($(LEVELNO),$(CHANNELNO)) termBox$(BOXNO)")
 }
 
 record (stringin, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
 {
     field (DTYP, "stream")
     field (INP, "@$(PROTO) read_voltage($(LEVELNO),$(CHANNELNO)) termBox$(BOXNO)")
-    field (SCAN, ".1 second")
+    field (SCAN, "1 second")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
+    field (PACT, "")
+    field (STAT, "")
+    field (SEVR, "")
+    field (VAL, "")
 }
+
+#record (stringin, "$(P):ELEMENT:$(ELEMENTNO):read_volt")
+#{
+#    field (DTYP, "stream")
+#    field (INP, "@$(PROTO) read_voltage($(LEVELNO),$(CHANNELNO)) termBox$(BOXNO)")
+#    field (SCAN, "1 second")
+#    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
+#   field (PACT, "")
+#    field (STAT, "")
+#    field (SEVR, "")
+#}
 
 #record (stringout, "$(P):set_specvolt")
 #{

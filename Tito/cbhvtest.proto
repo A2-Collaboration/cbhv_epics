@@ -1,7 +1,10 @@
-terminator = CR;
-readtimeout = 7000;
-pollperiod = 10;
-replytimeout = 7000;
+terminator = CR LF;
+ReadTimeout = 200000;
+#pollperiod = 10;
+ReplyTimeout = 100000;
+LockTimeout = 200000;
+WriteTimeoun = 200000
+
 command {
     out "%s";
 }
@@ -23,14 +26,34 @@ spybin {
     extraInput=ignore;
     in "%r";
 }
+
 read_voltage {
     out "read_adc floats_csv \$1 \$2";
-    in "%20c%s";
+    in "*%(TIME)T(%d.%m.%Y %H:%M:%S),%s";
+#    disconnect;
+    @mismatch{}
+    @replytimeout{}
+    @readtimeout{}
+    @writetimeout{}
+    ExtraInput = Ignore
 }
 
 set_voltage {
-    out "SetVpmF %s";
+    out "SetVpmF \$1 \$2 %s";
+    in "%s";
+    in "%s";
+    in "%s";
+    in "%s";
+    in "%s";
+    in "%s";
+    in "%s";
+    in "%s";
+    in "%s";
+    in "%s";
+    in "%s";
+    in "%s";
 }
+
 set_specvolt{
     out "SetVpmF \$1 \$2 %s";
 }

@@ -35,14 +35,14 @@ while (level < 5):
 		
 		caput("CB:HV:Box:%s:set_voltage" % box, "%d %d %s" % (level, channel, setvolt)) 
 		time.sleep(5)
-		caput("CB:HV:Box:%s:read_voltage" % box, "%d %d" % (level, channel))
-		time.sleep(1)
-		realvolt = caget("CB:HV:Box:%s:read_voltage" % box)
-		if realvolt==None:
-			print "EPICS needs to be started first!"
-			sys.exit(1)
-		voltstring = "%s %d %d %s => %s" % (box, level, channel, setvolt, realvolt)
-		print voltstring
+	#	caput("CB:HV:Box:%s:read_voltage" % box, "%d %d" % (level, channel))
+	#	time.sleep(1)
+	#	realvolt = caget("CB:HV:Box:%s:read_voltage" % box)
+	#	if realvolt==None:
+	#		print "EPICS needs to be started first!"
+	#		sys.exit(1)
+	#	voltstring = "%s %d %d %s => %s" % (box, level, channel, setvolt, realvolt)
+	#	print voltstring
 		channel = channel + 1
 		count = count +1
 
