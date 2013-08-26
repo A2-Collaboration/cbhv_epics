@@ -1,9 +1,9 @@
 terminator = CR LF;
-ReadTimeout = 200000;
+#ReadTimeout = 20000;
 #pollperiod = 10;
-ReplyTimeout = 100000;
-LockTimeout = 200000;
-WriteTimeout = 200000;
+LockTimeout = 10000;
+#WriteTimeout = 200000;
+
 
 command {
     out "%s";
@@ -29,13 +29,12 @@ spybin {
 
 read_voltage {
     out "read_adc floats_csv \$1 \$2";
-    in "%20c%s";
-#    @mismatch{}
-#    @replytimeout{}
-#    @readtimeout{}
-#    @writetimeout{}
+    in "%*d.%*d.%*d %*d:%*d:%*d,%f";
+    @mismatch{out "read_adc floats_csv \$1 \$2";  in "%*d.%*d.%*d %*d:%*d:%*d,%f";}
 }
 
 set_voltage {
     out "SetVpmF \$1 \$2 %s";
+    in "DAC: \$1   CH: \$2   U: %*f  Uk: %*f";
+    @mismatch{in "DAC: \$1   CH: \$2   U: %*f  Uk: %*f";}
 }
