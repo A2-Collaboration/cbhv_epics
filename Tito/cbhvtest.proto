@@ -30,11 +30,11 @@ spybin {
 read_voltage {
     out "read_adc floats_csv \$1 \$2";
     in "%*d.%*d.%*d %*d:%*d:%*d,%f";
-    @mismatch{out "read_adc floats_csv \$1 \$2";  in "%*d.%*d.%*d %*d:%*d:%*d,%f";}
+    @mismatch{in "%*d.%*d.%*d %*d:%*d:%*d,%f";}
 }
 
 set_voltage {
-    out "SetVpmF \$1 \$2 %s";
-    in "DAC: \$1   CH: \$2   U: %*f  Uk: %*f";
+    out "SetVpmF \$1 \$2 %f";
+    in "DAC: \$1   CH: \$2   U: %f  Uk: %*f";
     @mismatch{in "DAC: \$1   CH: \$2   U: %*f  Uk: %*f";}
 }

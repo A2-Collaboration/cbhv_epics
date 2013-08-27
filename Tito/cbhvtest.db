@@ -28,10 +28,51 @@
 #    field (OUT,  "@$(PROTO) read_voltage termBox$(BOXNO)")
 #} 
 #
-record (stringout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt")
+
+record (ao, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt")
 {
     field (DTYP, "stream")
     field (OUT,  "@$(PROTO) set_voltage($(LEVELNO),$(CHANNELNO)) termBox$(BOXNO)")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):alarms")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_HIGH")
+}
+
+record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):alarms")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt")
+    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
+    field (CALC, "A-B")
+    field (HIHI, 5)
+    field (HIGH, 2)
+    field (LOW, -2)
+    field (LOLO, -5)
+    field (HHSV,"MAJOR")
+    field (HSV,"MINOR")
+    field (LSV,"MINOR")
+    field (LLSV,"MAJOR")
+    field (SCAN, "1 second")
+    field (STAT, "")
+    field (SEVR, "")
+    field (NSTA, "")
+    field (NSEV, "")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_HIGH")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt")
+    field (INPB, 2)
+    field (CALC, "A+B")
+    field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt.HIGH")
+
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt_init")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
+    field (CALC, "A")
+    field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):alarms.INPA")
+    field (PINI, "YES")
+
 }
 
 record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
@@ -44,6 +85,19 @@ record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
     field (STAT, "")
     field (SEVR, "")
     field (VAL, "")
+    field (HIHI, 1650)
+    field (HIGH, 1630)
+    field (LOW, 1270)
+    field (LOLO, 1250)
+    field (HHSV,"MAJOR")
+    field (HSV,"MINOR")
+    field (LSV,"MINOR")
+    field (LLSV,"MAJOR")
+    field (STAT, "")
+    field (SEVR, "")
+    field (NSTA, "")
+    field (NSEV, "")
+    field (PINI, "YES")
 }
 
 #record (stringin, "$(P):ELEMENT:$(ELEMENTNO):read_volt")
