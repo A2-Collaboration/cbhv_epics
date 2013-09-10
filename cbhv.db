@@ -8,3 +8,21 @@ record (stringout, "$(P):Box:$(BOXNO):set_voltage")
     field (DTYP, "stream")
     field (OUT, "@cbhv.proto set_voltage termBox$(BOXNO)")
 }
+
+record (ai, "$(P):ELEMENT:$(ELEMENTNO):read_volt")
+{
+    field (DESC, "Used to read voltages by element")
+    field (EGU, "Volt")
+    field (LINR, "NO CONVERSION")
+    field (DTYP, "stream")
+    field (INP,  "@$(PROTO) read_volt($(LEVELNO),$(CHANNELNO)) termBox$(BOXNO)")
+}
+
+record (ao, "$(P):ELEMENT:$(ELEMENTNO):set_volt")
+{
+    field (DESC, "Used to set voltages by element")
+    field (EGU, "Volt")
+    field (LINR, "NO CONVERSION")
+    field (DTYP, "stream")
+    field (OUT,  "@$(PROTO) set_volt($(LEVELNO),$(CHANNELNO)) termBox$(BOXNO)")
+}

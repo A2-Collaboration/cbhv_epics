@@ -18,8 +18,19 @@ base*
 #ignore adl backup
 cbhv_BAK.adl
 /Oli
+/Tito/CSS_EPICS_3.2.1
 
 #ignore files just made for testing and ohter things
 
 Tito/count.txt
+Tito/cbhvtest_eememprint.txt
 Tito/sender.py
+Tito/epics_css_3.2.1-linux.gtk.x86.zip
+calibcurves.txt
+calibcurves2.txt
+hvtest.txt
+hvtest1.txt
+hvtest2.txt
+cbhvtest_element_voltage_list.txt
+Tito/hvtest.txt
+Tito/logfile.txt

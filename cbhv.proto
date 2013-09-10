@@ -1,46 +1,33 @@
 terminator = CR LF;
-readtimeout = 1000;
-pollperiod = 10;
-replytimeout = 1000;
-command {
-    out "%s";
-}
-info {
-    out "%s";
-    in "%39c";
-}
-request {
-    out "%s";
-    in "%(\$1)39c";
-}
-spy {
-    extraInput=ignore;
-    in "%39c";
-}
-spybin {
-    readtimeout = 1;
-    terminator = "";
-    extraInput=ignore;
-    in "%r";
-}
+ReadTimeout = 20000;
+#pollperiod = 10;
+ReplyTimeout = 5000;
+LockTimeout = 30000;
+
 read_voltage {
     connect 1000;
     out "read_adc floats_csv %s";
+
     in "%20c%s";
 }
 set_voltage {
     out "SetVpmF %s";
 }
-set_specvolt{
-    out "SetVpmF \$1 \$2 %s";
+
+set_volt {
+    out "SetVpmF \$1 \$2 %f";
+    in "%*42c";
+    in "%*19c";
+    in "%*76c";
+    in "%*76c";
+    in "%*76c";
+    in "%*76c";
+    in "%*76c";
+    @mismatch{}	
 }
-setncheck{
-    out "SetVpmF \$1 \$2 %s";
-    wait 5000;
-    out "read_adc floats_csv \$3 \$4";
-    in "%20c%s";
-}
-repeatcheck{
+
+read_volt {
     out "read_adc floats_csv \$1 \$2";
-    in "%20c%s";
-}	
+    in "%*d.%*d.%*d %*d:%*d:%*d,%f";
+    @mismatch{in "%*d.%*d.%*d %*d:%*d:%*d,%f";}
+}
