@@ -1,0 +1,37 @@
+file "cbhvtest.db" 
+{
+	pattern {PROTO, EELO, EEUP}
+		{cbhvtest.proto, dhcp, DHCP}
+		{cbhvtest.proto, ip, IP}
+		{cbhvtest.proto, mask, MASK}
+		{cbhvtest.proto, gate, GATE}
+		{cbhvtest.proto, dns, DNS}
+		{cbhvtest.proto, ntpserver, NTPSERVER}
+		{cbhvtest.proto, utczone, UTCZONE}
+		{cbhvtest.proto, r1, R1}
+		{cbhvtest.proto, r2, R2}
+		{cbhvtest.proto, ntp, NTP}
+		{cbhvtest.proto, umin, UMIN}
+		{cbhvtest.proto, levels, LEVELS}
+		{cbhvtest.proto, neg, NEG}
+		{cbhvtest.proto, mem, MEM}
+		{cbhvtest.proto, file, FILE}
+		{cbhvtest.proto, reg_div, REG_DIV}
+		{cbhvtest.proto, cards, CARDS}
+		{cbhvtest.proto, m0, M0}
+		{cbhvtest.proto, n0, N0}
+		{cbhvtest.proto, m1, M1}
+		{cbhvtest.proto, n1, N1}
+		{cbhvtest.proto, m2, M2}
+		{cbhvtest.proto, n2, N2}
+		{cbhvtest.proto, m3, M3}
+		{cbhvtest.proto, n3, N3}
+		{cbhvtest.proto, m4, M4}
+		{cbhvtest.proto, n4, N4}
+		{cbhvtest.proto, umax, UMAX}
+		{cbhvtest.proto, mac, MAC}
+		{cbhvtest.proto, lease, LEASE}
+		{cbhvtest.proto, reg, REG}
+		{cbhvtest.proto, regn, REGN}
+		{cbhvtest.proto, write_protect, WRITE_PROTECT}
+}

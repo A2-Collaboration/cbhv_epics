@@ -1,6 +1,3 @@
-file "cbhvtest.db" 
-{
-	pattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO, ELEMENTNO, CHAROFFSET}
 720	19	0	0
 721	19	0	1
 722	19	0	2
@@ -41,4 +38,3 @@ file "cbhvtest.db"
 757	19	4	5
 758	19	4	6
 759	19	4	7
-}

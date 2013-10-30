@@ -1,480 +1,123 @@
-Terminator = CR LF;
-#InTerminator = ">";
-ReadTimeout = 1000;
+OutTerminator = CR LF;
+InTerminator = ">";
 pollperiod = 1;
-ReplyTimeout = 6000;
+#ReplyTimeout = 6000;
 LockTimeout = 300000;
 #WriteTimeout = 200000;
 
-read_voltage {
-    out "read_adc floats_csv \$1 \$2";
-    in "%*d.%*d.%*d %*d:%*d:%*d,%f";
-    @mismatch{in "%*d.%*d.%*d %*d:%*d:%*d,%f";}
-    extraInput = ignore;
-}
-
-set_voltage {
-    out "SetVpmF \$1 \$2 %.3f";
-    InTerminator = ">";
-    in "%s";
-#    in "%*30cUk: %f";
-#    in "Nachregelung aktiv!";
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";	
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";	
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";
-#    in "Messwert: %*f   DAC: %*i   CH: %*i   Value: %*f   korrigiert: %*f";
-#    wait 5000;
-#    disconnect;
-#    @mismatch{ 
-#    in "%*42c";
-#    in "%*19c";
-#    in "%*76c";
-#    in "%*76c";
-#    in "%*76c";
-#    in "%*76c";
-#    in "%*76c";
-#    in "%*76c";
-#    in "%*76c";
-#    in "%*76c";
-#    in "%*76c";
-#    in "%*76c";}
-}
-
-reg1stline 
+read_voltage
 {
-in "%s";
-extraInput = ignore;
-@mismatch{}
-@readtimeout{}
-@replytimeout{}
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*\$1c%f%*#s";
 }
 
-reg2ndline
+read_adc
 {
-in "%s";
-extraInput = ignore;
-@mismatch{}
-@readtimeout{}
-@replytimeout{}
-
+out "read_adc csv";
+in "%*#s";
+ReplyTimeout = 5000;
+ReadTimeout = 5000;
 }
 
-regline
+set_voltage 
 {
-in "%s";
-extraInput = ignore;
-@mismatch{}
-@readtimeout{}
-@replytimeout{}
+out "SetVpmF \$1 \$2 %f";
+in "%*#s";
+ReplyTimeout = 50000;
+ReadTimeout = 50000;
 }
+
+read_temp
+{
+out "READTEMP";
+in "%*#s";
+}
+
+read_temp0
+{
+in "           | Temperatur %*113c%7f%*#s";
+}
+
+read_temp1
+{
+in "           | Temperatur %*141c%7f%*#s";
+}
+
+read_temp2
+{
+in "           | Temperatur %*168c%7f%*#s";
+}
+
+####################### read and write eemem values ########################
 
 eemem_print
 {
 out "eemem %s";
 in "%s";
 InTerminator = ">";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
+extraInput=ignore;
 }
 
-####################### read and write eemem values ########################
-
-read_dhcp {in "DHCP=%s";} 
-
-set_dhcp {
-out "eemem unprotect";
-out "eemem del DHCP";
-out "eemem add DHCP %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
+read_eemem_value 
+{
+in "\$1=%s";
+InTerminator = CR LF;
+extraInput = ignore;
 }
 
-read_ip {in "IP=%s";} 
-
-set_ip {
+set_eemem_value_standalone 
+{
+extraInput = ignore;
 out "eemem unprotect";
-out "eemem del IP";
-out "eemem add IP %s";
+in "unprotectet";
+out "eemem del \$1";
+in "";
+out "eemem add \$1 %s";
+in "";
 out "eemem protect";
+in "";
 out "eemem print";
-in "%s";
+in "%*s";
 out "read_config";
+in "Konfiguration aus EEPROM %*s";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
 }
 
-read_mask {in "MASK=%s";} 
-
-set_mask {
-out "eemem unprotect";
-out "eemem del MASK";
-out "eemem add MASK %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
+set_eemem_value 
+{
+extraInput = ignore;
+out "eemem del \$1";
+in "";
+out "eemem add \$1 %s";
+in "";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
 }
 
-read_gate {in "GATE=%s";} 
-
-set_gate {
+unprotect_eemem {
+extraInput = ignore;
 out "eemem unprotect";
-out "eemem del GATE";
-out "eemem add GATE %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
+in "unprotectet";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
 }
 
-read_dns {in "DNS=%s";} 
-
-set_dns {
-out "eemem unprotect";
-out "eemem del DNS";
-out "eemem add DNS %s";
+protect_eemem 
+{
+extraInput = ignore;
 out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
+in "";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
 }
 
-read_ntpserver {in "NTPSERVER=%s";} 
-
-set_ntpserver {
-out "eemem unprotect";
-out "eemem del NTPSERVER";
-out "eemem add NTPSERVER %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
+reload_eemem 
+{
+extraInput = ignore;
 out "read_config";
-}
-
-read_utczone {in "UTCZONE=%s";} 
-
-set_utczone {
-out "eemem unprotect";
-out "eemem del UTCZONE";
-out "eemem add UTCZONE %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_r1 {in "R1=%s";} 
-
-set_r1 {
-out "eemem unprotect";
-out "eemem del R1";
-out "eemem add R1 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_r2 {in "R2=%s";} 
-
-set_r2 {
-out "eemem unprotect";
-out "eemem del R2";
-out "eemem add R2 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_ntp {in "NTP=%s";} 
-
-set_ntp {
-out "eemem unprotect";
-out "eemem del NTP";
-out "eemem add NTP %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_umin {in "UMIN=%s";} 
-
-set_umin {
-out "eemem unprotect";
-out "eemem del UMIN";
-out "eemem add UMIN %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_levels {in "LEVELS=%s";} 
-
-set_levels {
-out "eemem unprotect";
-out "eemem del LEVELS";
-out "eemem add LEVELS %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_neg {in "NEG=%s";} 
-
-set_neg {
-out "eemem unprotect";
-out "eemem del NEG";
-out "eemem add NEG %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_mem {in "MEM=%s";} 
-
-set_mem {
-out "eemem unprotect";
-out "eemem del MEM";
-out "eemem add MEM %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_file {in "FILE=%s";} 
-
-set_file {
-out "eemem unprotect";
-out "eemem del FILE";
-out "eemem add FILE %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_reg_div {in "REG_DIV=%s";} 
-
-set_reg_div {
-out "eemem unprotect";
-out "eemem del REG_DIV";
-out "eemem add REG_DIV %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_cards {in "CARDS=%s";} 
-
-set_cards {
-out "eemem unprotect";
-out "eemem del CARDS";
-out "eemem add CARDS %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_m0 {in "M0=%s";} 
-
-set_m0 {
-out "eemem unprotect";
-out "eemem del M0";
-out "eemem add M0 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_n0 {in "N0=%s";} 
-
-set_n0 {
-out "eemem unprotect";
-out "eemem del N0";
-out "eemem add N0 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_m1 {in "M1=%s";} 
-
-set_m1 {
-out "eemem unprotect";
-out "eemem del M1";
-out "eemem add M1 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_n1 {in "N1=%s";} 
-
-set_n1 {
-out "eemem unprotect";
-out "eemem del N1";
-out "eemem add N1 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_m2 {in "M2=%s";} 
-
-set_m2 {
-out "eemem unprotect";
-out "eemem del M2";
-out "eemem add M2 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_n2 {in "N2=%s";} 
-
-set_n2 {
-out "eemem unprotect";
-out "eemem del N2";
-out "eemem add N2 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_m3 {in "M3=%s";} 
-
-set_m3 {
-out "eemem unprotect";
-out "eemem del M3";
-out "eemem add M3 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_n3 {in "N3=%s";} 
-
-set_n3 {
-out "eemem unprotect";
-out "eemem del N3";
-out "eemem add N3 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_m4 {in "M4=%s";} 
-
-set_m4 {
-out "eemem unprotect";
-out "eemem del M4";
-out "eemem add M4 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_n4 {in "N4=%s";} 
-
-set_n4 {
-out "eemem unprotect";
-out "eemem del N4";
-out "eemem add N4 %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_umax {in "UMAX=%s";} 
-
-set_umax {
-out "eemem unprotect";
-out "eemem del UMAX";
-out "eemem add UMAX %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_mac {in "MAC=%s";} 
-
-set_mac {
-out "eemem unprotect";
-out "eemem del MAC";
-out "eemem add MAC %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_lease {in "LEASE=%s";} 
-
-set_lease {
-out "eemem unprotect";
-out "eemem del LEASE";
-out "eemem add LEASE %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_reg {in "REG=%s";} 
-
-set_reg {
-out "eemem unprotect";
-out "eemem del REG";
-out "eemem add REG %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_regn {in "REGN=%s";} 
-
-set_regn {
-out "eemem unprotect";
-out "eemem del REGN";
-out "eemem add REGN %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
-}
-
-read_write_protect {in "WRITE_PROTECT=%s";} 
-
-set_write_protect {
-out "eemem unprotect";
-out "eemem del WRITE_PROTECT";
-out "eemem add WRITE_PROTECT %s";
-out "eemem protect";
-out "eemem print";
-in "%s";
-out "read_config";
+in "Konfiguration aus EEPROM %*s";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
 }

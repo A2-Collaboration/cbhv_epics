@@ -28,9 +28,9 @@ while 1:
            caput ("CB:HV:BOX:19:%s:%s:set_volt" % (level, channel), "%d" % voltvalue)
            print caget ("CB:HV:BOX:19:%s:%s:set_volt" % (level, channel))
            channel = channel + 1
-           voltvalue = voltvalue + 5
+           voltvalue = voltvalue + 1
         level = level + 1
     round = round + 1
-    time.sleep(120)
+    time.sleep(180)
 
 

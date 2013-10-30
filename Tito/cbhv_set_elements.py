@@ -22,29 +22,19 @@ werte = f.readlines()
 
 f.close
 
-
-# write to box
-
 from epics import caput
 
-loop = 0
+count = 0
 
-while (loop < 10):
-
-    loop = loop + 1
-
-    count = 0
-
-    while (count < len(werte)):
+while (count < len(werte)):
 
         zeilenwerte = werte[count].split()
         if (len(zeilenwerte)==2):
             caput ("CB:HV:ELEMENT:%s:set_volt" % zeilenwerte[0], "%s" % zeilenwerte[1])
-            print "ELEMENT:%s VOLTAGE:%s\n" % (zeilenwerte[0], zeilenwerte[1])
-            print loop
-            time.sleep(4)
-
+        count = count + 1
+            
         else: 
+
             print "Missing or to many values in line %d (index starts at zero)!" % count
 
         count = count + 1
