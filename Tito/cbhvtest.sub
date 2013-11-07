@@ -40,6 +40,7 @@ file "cbhvtest_voltage.db"
 		{cbhvtest.proto, CB:HV, 19, 4, 4, 756, 403}
 		{cbhvtest.proto, CB:HV, 19, 4, 5, 757, 412}
 		{cbhvtest.proto, CB:HV, 19, 4, 6, 758, 421}
+		{cbhvtest.proto, CB:HV, 19, 4, 7, 759, 430}
 }
 
 file "cbhvtest_eemem.db" 

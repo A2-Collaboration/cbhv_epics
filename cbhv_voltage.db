@@ -35,23 +35,65 @@ record (ao, "$(P):ELEMENT:$(ELEMENTNO):set_volt")
     field (PRIO, "HIGH")
 }
 
-record (calcout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_LOW")
+record (calcout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):latest_set_volt_channel")
 {
     field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt")
+    field (CALC, "A")
+    field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):latest_set_volt.A")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):latest_set_volt")
+}
+
+record (calcout, "$(P):ELEMENT:$(ELEMENTNO):latest_set_volt_element")
+{
+    field (INPA, "$(P):ELEMENT:$(ELEMENTNO):set_volt")
+    field (CALC, "A")
+    field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):latest_set_volt.A")
+    field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):latest_set_volt")
+}
+
+record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):latest_set_volt")
+{
+    field (INPA, "0")
+    field (CALC, "A")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt_postprocessing")
+}
+
+record (fanout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt_postprocessing")
+{
+    field (LNK1, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_LOW")
+    field (LNK2, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_HIGH")
+    field (LNK3, "$(P):BOX:$(BOXNO):set_active")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_LOW")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):latest_set_volt")
     field (INPB, "2")
     field (CALC, "A-B")
     field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt.LOW")
-    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_HIGH")
 }
 
 record (calcout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_HIGH")
 {
-    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt")
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):latest_set_volt")
     field (INPB, "2")
     field (CALC, "A+B")
     field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt.HIGH")
 }
 
+record (calcout, "$(P):BOX:$(BOXNO):set_active")
+{
+    field (INPA, "1")
+    field (CALC, "A")
+    field (OUT, "$(P):BOX:$(BOXNO):is_active.A")
+}
+
+record (calc, "$(P):BOX:$(BOXNO):is_active")
+{
+    field (INPA, "0")
+    field (CALC, "A")
+    field (SCAN, ".1 second")
+}
 ######### Reading voltages #########
 
 record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
@@ -71,14 +113,23 @@ record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
     field (HSV,"MINOR")
     field (LSV,"MINOR")
     field (LLSV,"MAJOR")
-    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):volt_variance")
+    field (FLNK, "$(P):BOX:$(BOXNO):read_active")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):read_active")
+{
+    field (INPA, "0")
+    field (CALC, "A")
+    field (OUT, "$(P):BOX:$(BOXNO):is_active.A")
+#    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):volt_variance")
 }
 
 record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):volt_variance")
 {
     field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt")
-    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):set_volt")
+    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):latest_set_volt")
     field (CALC, "A-B")
+    field (SCAN, ".1 second")
 }
 
 record (stringin, "$(P):BOX:$(BOXNO):read_adc")
@@ -93,6 +144,31 @@ record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):statval")
 {
     field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):read_volt.STAT")
     field (CALC, "A")
+    field (SCAN, ".1 second")
+}
+
+record (sel, "$(P):BOX:$(BOXNO):$(LEVELNO):status")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):0:read_volt.STAT")
+    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):1:read_volt.STAT") 
+    field (INPC, "$(P):BOX:$(BOXNO):$(LEVELNO):2:read_volt.STAT")
+    field (INPD, "$(P):BOX:$(BOXNO):$(LEVELNO):3:read_volt.STAT") 
+    field (INPE, "$(P):BOX:$(BOXNO):$(LEVELNO):4:read_volt.STAT")
+    field (INPF, "$(P):BOX:$(BOXNO):$(LEVELNO):5:read_volt.STAT") 
+    field (INPG, "$(P):BOX:$(BOXNO):$(LEVELNO):6:read_volt.STAT")
+    field (INPH, "$(P):BOX:$(BOXNO):$(LEVELNO):7:read_volt.STAT") 
+    field (SELM, "High Signal")
+    field (SCAN, ".1 second")
+}
+
+record (sel, "$(P):BOX:$(BOXNO):status")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):0:status")
+    field (INPB, "$(P):BOX:$(BOXNO):1:status") 
+    field (INPC, "$(P):BOX:$(BOXNO):2:status")
+    field (INPD, "$(P):BOX:$(BOXNO):3:status") 
+    field (INPE, "$(P):BOX:$(BOXNO):4:status")
+    field (SELM, "High Signal")
     field (SCAN, ".1 second")
 }
 
