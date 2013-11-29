@@ -22,9 +22,9 @@ epicsEnvSet "STREAM_PROTOCOL_PATH", "."
 #drvAsynIPPortConfigure "termBox16", "10.32.161.116:23"
 #drvAsynIPPortConfigure "termBox17", "10.32.161.117:23"
 #drvAsynIPPortConfigure "termBox18", "10.32.161.118:23"
-drvAsynIPPortConfigure "termBox19", "10.32.161.119:23"
+drvAsynIPPortConfigure "termBox19", "CBHV19.online.a2.kph.:23"
 
 #dbLoadRecords "cbhvtest.db","PROTO=cbhvtest.proto,P=CB:HV,BOXNO=19,LEVELNO=1,CHANNELNO=1"
 dbLoadTemplate "cbhvtest.sub"
 iocInit
-#var streamDebug 1
+# var streamDebug 1

@@ -1,9 +1,9 @@
 #! /usr/bin/python
 
 f = open("cbhvtest_eememprint.txt", "r")
-g = open("cbhvtest.db", "a")
-h = open("cbhvtest.proto", "a")
-i = open("cbhvtest_monitor_eemem.py", "a")
+#g = open("cbhvtest.db", "a")
+#h = open("cbhvtest.proto", "a")
+#i = open("cbhvtest_monitor_eemem.py", "a")
 j = open("cbhvtest_eemem.sub", "w")
 
 
@@ -40,7 +40,7 @@ box = 1
 
 j.write("file \"cbhvtest_eemem.db\" \n{\n\tpattern {PROTO, P, BOXNO, EELO, EEUP}\n")
 
-while (box < 20):
+while (box < 21):
 
     count2 = 0
     
@@ -49,9 +49,12 @@ while (box < 20):
         zeilenwert = werte[count2].split("=")
 
         klein = zeilenwert[0].lower()
+        erster_buchstabe = klein[:1].upper()
+        rest = klein[1:]
+        klein = erster_buchstabe + rest
         gross = zeilenwert[0].upper()
 
-        j.write("\t\t{cbhvtest.proto, CB:HV, %d, %s, %s}\n" % (box, klein, gross))
+        j.write("\t\t{cbhvtest.proto, CB:CB:HV, %d, %s, %s}\n" % (box, klein, gross))
         count2 = count2 + 1
     
     box = box + 1
@@ -62,8 +65,8 @@ j.write("}")
 
 
 
-h.close()
-g.close()
-i.close()
+#h.close()
+#g.close()
+#i.close()
 j.close()
  

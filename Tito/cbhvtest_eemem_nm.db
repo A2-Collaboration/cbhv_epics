@@ -1,0 +1,28 @@
+##################################################################
+#######################    eemem n and m values    ###############
+##################################################################
+
+record (ai, "$(P):BOX:$(BOXNO):Read$(LETTER)$(LEVELNO)_$(CHANNELNO)")
+{
+    field (DTYP, "stream")
+    field (INP, "@$(PROTO) read_mnx$(CHANNELNO)($(LETTER),$(LEVELNO)) termBox$(BOXNO)")
+    field (SCAN, "I/O Intr")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):Set$(LETTER)$(LEVELNO)")
+{
+    field (INPA, "0")
+    field (INPB, "0")
+    field (INPC, "0")
+    field (INPD, "0")
+    field (INPE, "0")
+    field (INPF, "0")
+    field (INPG, "0")
+    field (INPH, "0")
+    field (CALC, "0")
+    field (VAL, "0")
+    field (DTYP, "stream")
+    field (OUT, "@$(PROTO) set_nmx($(LETTER),$(LEVELNO)) termBox$(BOXNO)")
+    field (SCAN, "Passive")
+#    field (PRIO, "HIGH")
+}

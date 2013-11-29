@@ -1,82 +1,156 @@
 file "cbhvtest_voltage.db" 
 {
-	pattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO, ELEMENTNO, CHAROFFSET}
-		{cbhvtest.proto, CB:HV, 19, 0, 0, 720, 67}
-		{cbhvtest.proto, CB:HV, 19, 0, 1, 721, 76}
-		{cbhvtest.proto, CB:HV, 19, 0, 2, 722, 85}
-		{cbhvtest.proto, CB:HV, 19, 0, 3, 723, 94}
-		{cbhvtest.proto, CB:HV, 19, 0, 4, 724, 103}
-		{cbhvtest.proto, CB:HV, 19, 0, 5, 725, 112}
-		{cbhvtest.proto, CB:HV, 19, 0, 6, 726, 121}
-		{cbhvtest.proto, CB:HV, 19, 0, 7, 727, 130}
-		{cbhvtest.proto, CB:HV, 19, 1, 0, 728, 142}
-		{cbhvtest.proto, CB:HV, 19, 1, 1, 729, 151}
-		{cbhvtest.proto, CB:HV, 19, 1, 2, 730, 160}
-		{cbhvtest.proto, CB:HV, 19, 1, 3, 731, 169}
-		{cbhvtest.proto, CB:HV, 19, 1, 4, 732, 178}
-		{cbhvtest.proto, CB:HV, 19, 1, 5, 733, 187}
-		{cbhvtest.proto, CB:HV, 19, 1, 6, 734, 196}
-		{cbhvtest.proto, CB:HV, 19, 1, 7, 735, 205}
-		{cbhvtest.proto, CB:HV, 19, 2, 0, 736, 217}
-		{cbhvtest.proto, CB:HV, 19, 2, 1, 737, 226}
-		{cbhvtest.proto, CB:HV, 19, 2, 2, 738, 235}
-		{cbhvtest.proto, CB:HV, 19, 2, 3, 739, 244}
-		{cbhvtest.proto, CB:HV, 19, 2, 4, 740, 253}
-		{cbhvtest.proto, CB:HV, 19, 2, 5, 741, 262}
-		{cbhvtest.proto, CB:HV, 19, 2, 6, 742, 271}
-		{cbhvtest.proto, CB:HV, 19, 2, 7, 743, 280}
-		{cbhvtest.proto, CB:HV, 19, 3, 0, 744, 292}
-		{cbhvtest.proto, CB:HV, 19, 3, 1, 745, 301}
-		{cbhvtest.proto, CB:HV, 19, 3, 2, 746, 310}
-		{cbhvtest.proto, CB:HV, 19, 3, 3, 747, 319}
-		{cbhvtest.proto, CB:HV, 19, 3, 4, 748, 328}
-		{cbhvtest.proto, CB:HV, 19, 3, 5, 749, 337}
-		{cbhvtest.proto, CB:HV, 19, 3, 6, 750, 346}
-		{cbhvtest.proto, CB:HV, 19, 3, 7, 751, 355}
-		{cbhvtest.proto, CB:HV, 19, 4, 0, 752, 367}
-		{cbhvtest.proto, CB:HV, 19, 4, 1, 753, 376}
-		{cbhvtest.proto, CB:HV, 19, 4, 2, 754, 385}
-		{cbhvtest.proto, CB:HV, 19, 4, 3, 755, 394}
-		{cbhvtest.proto, CB:HV, 19, 4, 4, 756, 403}
-		{cbhvtest.proto, CB:HV, 19, 4, 5, 757, 412}
-		{cbhvtest.proto, CB:HV, 19, 4, 6, 758, 421}
-		{cbhvtest.proto, CB:HV, 19, 4, 7, 759, 430}
+	pattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO, ELEMENTNO, STRINGPOS, INUSE}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 0, 720, l0ch0, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 1, 721, l0ch1, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 2, 722, l0ch2, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 3, 723, l0ch3, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 4, 724, l0ch4, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 5, 725, l0ch5, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 6, 726, l0ch6, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 7, 727, l0ch7, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 0, 728, l1ch0, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 1, 729, l1ch1, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 2, 730, l1ch2, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 3, 731, l1ch3, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 4, 732, l1ch4, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 5, 733, l1ch5, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 6, 734, l1ch6, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 7, 735, l1ch7, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 0, 736, l2ch0, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 1, 737, l2ch1, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 2, 738, l2ch2, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 3, 739, l2ch3, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 4, 740, l2ch4, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 5, 741, l2ch5, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 6, 742, l2ch6, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 7, 743, l2ch7, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 0, 744, l3ch0, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 1, 745, l3ch1, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 2, 746, l3ch2, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 3, 747, l3ch3, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 4, 748, l3ch4, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 5, 749, l3ch5, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 6, 750, l3ch6, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 7, 751, l3ch7, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 0, 752, l4ch0, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 1, 753, l4ch1, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 2, 754, l4ch2, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 3, 755, l4ch3, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 4, 756, l4ch4, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 5, 757, l4ch5, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 6, 758, l4ch6, 1}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 7, 759, l4ch7, 1}
 }
 
 file "cbhvtest_eemem.db" 
 {
 	pattern {PROTO, P, BOXNO, EELO, EEUP}
-		{cbhvtest.proto, CB:HV, 19, dhcp, DHCP}
-		{cbhvtest.proto, CB:HV, 19, ip, IP}
-		{cbhvtest.proto, CB:HV, 19, mask, MASK}
-		{cbhvtest.proto, CB:HV, 19, gate, GATE}
-		{cbhvtest.proto, CB:HV, 19, dns, DNS}
-		{cbhvtest.proto, CB:HV, 19, ntpserver, NTPSERVER}
-		{cbhvtest.proto, CB:HV, 19, utczone, UTCZONE}
-		{cbhvtest.proto, CB:HV, 19, r1, R1}
-		{cbhvtest.proto, CB:HV, 19, r2, R2}
-		{cbhvtest.proto, CB:HV, 19, ntp, NTP}
-		{cbhvtest.proto, CB:HV, 19, umin, UMIN}
-		{cbhvtest.proto, CB:HV, 19, levels, LEVELS}
-		{cbhvtest.proto, CB:HV, 19, neg, NEG}
-		{cbhvtest.proto, CB:HV, 19, mem, MEM}
-		{cbhvtest.proto, CB:HV, 19, file, FILE}
-		{cbhvtest.proto, CB:HV, 19, reg_div, REG_DIV}
-		{cbhvtest.proto, CB:HV, 19, cards, CARDS}
-		{cbhvtest.proto, CB:HV, 19, m0, M0}
-		{cbhvtest.proto, CB:HV, 19, n0, N0}
-		{cbhvtest.proto, CB:HV, 19, m1, M1}
-		{cbhvtest.proto, CB:HV, 19, n1, N1}
-		{cbhvtest.proto, CB:HV, 19, m2, M2}
-		{cbhvtest.proto, CB:HV, 19, n2, N2}
-		{cbhvtest.proto, CB:HV, 19, m3, M3}
-		{cbhvtest.proto, CB:HV, 19, n3, N3}
-		{cbhvtest.proto, CB:HV, 19, m4, M4}
-		{cbhvtest.proto, CB:HV, 19, n4, N4}
-		{cbhvtest.proto, CB:HV, 19, umax, UMAX}
-		{cbhvtest.proto, CB:HV, 19, mac, MAC}
-		{cbhvtest.proto, CB:HV, 19, lease, LEASE}
-		{cbhvtest.proto, CB:HV, 19, reg, REG}
-		{cbhvtest.proto, CB:HV, 19, regn, REGN}
-		{cbhvtest.proto, CB:HV, 19, write_protect, WRITE_PROTECT}
+		{cbhvtest.proto, CB:CB:HV, 19, Dhcp, DHCP}
+		{cbhvtest.proto, CB:CB:HV, 19, Ip, IP}
+		{cbhvtest.proto, CB:CB:HV, 19, Mask, MASK}
+		{cbhvtest.proto, CB:CB:HV, 19, Gate, GATE}
+		{cbhvtest.proto, CB:CB:HV, 19, Dns, DNS}
+		{cbhvtest.proto, CB:CB:HV, 19, Ntpserver, NTPSERVER}
+		{cbhvtest.proto, CB:CB:HV, 19, Utczone, UTCZONE}
+		{cbhvtest.proto, CB:CB:HV, 19, R1, R1}
+		{cbhvtest.proto, CB:CB:HV, 19, R2, R2}
+		{cbhvtest.proto, CB:CB:HV, 19, Ntp, NTP}
+		{cbhvtest.proto, CB:CB:HV, 19, Umin, UMIN}
+		{cbhvtest.proto, CB:CB:HV, 19, Levels, LEVELS}
+		{cbhvtest.proto, CB:CB:HV, 19, Neg, NEG}
+		{cbhvtest.proto, CB:CB:HV, 19, Mem, MEM}
+		{cbhvtest.proto, CB:CB:HV, 19, File, FILE}
+		{cbhvtest.proto, CB:CB:HV, 19, Reg_div, REG_DIV}
+		{cbhvtest.proto, CB:CB:HV, 19, Cards, CARDS}
+		{cbhvtest.proto, CB:CB:HV, 19, Umax, UMAX}
+		{cbhvtest.proto, CB:CB:HV, 19, Mac, MAC}
+		{cbhvtest.proto, CB:CB:HV, 19, Lease, LEASE}
+		{cbhvtest.proto, CB:CB:HV, 19, Reg, REG}
+		{cbhvtest.proto, CB:CB:HV, 19, Regn, REGN}
+}
+
+file "cbhvtest_eemem_nm.db"
+{
+    pattern {PROTO, P, BOXNO, LETTER, LEVELNO, CHANNELNO}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 0, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 0, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 0, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 0, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 0, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 0, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 0, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 0, 7}
+	    {cbhvtest.proto, CB:CB:HV, 19, N, 1, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 1, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 1, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 1, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 1, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 1, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 1, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 1, 7}
+	    {cbhvtest.proto, CB:CB:HV, 19, N, 2, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 2, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 2, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 2, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 2, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 2, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 2, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 2, 7}
+	    {cbhvtest.proto, CB:CB:HV, 19, N, 3, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 3, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 3, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 3, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 3, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 3, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 3, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 3, 7}
+	    {cbhvtest.proto, CB:CB:HV, 19, N, 4, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 4, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 4, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 4, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 4, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 4, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 4, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, N, 4, 7}
+	    {cbhvtest.proto, CB:CB:HV, 19, M, 0, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 0, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 0, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 0, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 0, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 0, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 0, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 0, 7}
+	    {cbhvtest.proto, CB:CB:HV, 19, M, 1, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 1, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 1, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 1, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 1, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 1, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 1, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 1, 7}
+	    {cbhvtest.proto, CB:CB:HV, 19, M, 2, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 2, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 2, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 2, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 2, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 2, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 2, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 2, 7}
+	    {cbhvtest.proto, CB:CB:HV, 19, M, 3, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 3, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 3, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 3, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 3, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 3, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 3, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 3, 7}
+	    {cbhvtest.proto, CB:CB:HV, 19, M, 4, 0}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 4, 1}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 4, 2}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 4, 3}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 4, 4}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 4, 5}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 4, 6}
+    	    {cbhvtest.proto, CB:CB:HV, 19, M, 4, 7}
 }

@@ -1,44 +1,44 @@
 file "cbhvtest.db" 
 {
-	pattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO, ELEMENTNO, CHAROFFSET}
-720	19	0	0
-721	19	0	1
-722	19	0	2
-723	19	0	3
-724	19	0	4
-725	19	0	5
-726	19	0	6
-727	19	0	7
-728	19	1	0
-729	19	1	1
-730	19	1	2
-731	19	1	3
-732	19	1	4
-733	19	1	5
-734	19	1	6
-735	19	1	7
-736	19	2	0
-737	19	2	1
-738	19	2	2
-739	19	2	3
-740	19	2	4
-741	19	2	5
-742	19	2	6
-743	19	2	7
-744	19	3	0
-745	19	3	1
-746	19	3	2
-747	19	3	3
-748	19	3	4
-749	19	3	5
-750	19	3	6
-751	19	3	7
-752	19	4	0
-753	19	4	1
-754	19	4	2
-755	19	4	3
-756	19	4	4
-757	19	4	5
-758	19	4	6
-759	19	4	7
+	pattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO, ELEMENTNO, STRINGPOS, INUSE}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 0, 720, l0ch0, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 1, 721, l0ch1, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 2, 722, l0ch2, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 3, 723, l0ch3, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 4, 724, l0ch4, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 5, 725, l0ch5, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 6, 726, l0ch6, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 0, 7, 727, l0ch7, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 0, 728, l1ch0, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 1, 729, l1ch1, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 2, 730, l1ch2, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 3, 731, l1ch3, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 4, 732, l1ch4, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 5, 733, l1ch5, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 6, 734, l1ch6, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 1, 7, 735, l1ch7, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 0, 736, l2ch0, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 1, 737, l2ch1, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 2, 738, l2ch2, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 3, 739, l2ch3, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 4, 740, l2ch4, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 5, 741, l2ch5, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 6, 742, l2ch6, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 2, 7, 743, l2ch7, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 0, 744, l3ch0, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 1, 745, l3ch1, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 2, 746, l3ch2, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 3, 747, l3ch3, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 4, 748, l3ch4, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 5, 749, l3ch5, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 6, 750, l3ch6, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 3, 7, 751, l3ch7, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 0, 752, l4ch0, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 1, 753, l4ch1, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 2, 754, l4ch2, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 3, 755, l4ch3, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 4, 756, l4ch4, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 5, 757, l4ch5, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 6, 758, l4ch6, yes}
+		{cbhvtest.proto, CB:CB:HV, 19, 4, 7, 759, l4ch7, yes}
 }

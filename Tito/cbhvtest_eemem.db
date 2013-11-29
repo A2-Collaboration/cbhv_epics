@@ -1,48 +1,72 @@
-record (stringout, "$(P):BOX:$(BOXNO):set_$(EELO)_standalone")
+record (stringout, "$(P):BOX:$(BOXNO):Set$(EELO)Standalone")
 {
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) set_eemem_value_standalone($(EEUP)) termBox$(BOXNO)")
     field (PRIO, "HIGH")
 }
 
-record (stringin, "$(P):BOX:$(BOXNO):read_$(EELO)")
+record (stringin, "$(P):BOX:$(BOXNO):Read$(EELO)")
 {
     field (DTYP, "stream")
     field (INP, "@$(PROTO) read_eemem_value($(EEUP)) termBox$(BOXNO)")
     field (SCAN, "I/O Intr")
 }
 
-record (stringout, "$(P):BOX:$(BOXNO):eemem")
+record (stringout, "$(P):BOX:$(BOXNO):PrintEemem")
 {
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) eemem_print termBox$(BOXNO)")
     field (PRIO, "HIGH")
+    field (PINI, "YES")
 }
 
-record (stringout, "$(P):BOX:$(BOXNO):set_$(EELO)")
+record (stringout, "$(P):BOX:$(BOXNO):Set$(EELO)")
 {
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) set_eemem_value($(EEUP)) termBox$(BOXNO)")
     field (PRIO, "HIGH")
 }
 
-record (stringout, "$(P):BOX:$(BOXNO):unprotect_eemem")
+record (stringout, "$(P):BOX:$(BOXNO):UnprotectEemem")
 {
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) unprotect_eemem termBox$(BOXNO)")
     field (PRIO, "HIGH")
+    field (FLNK, "$(P):BOX:$(BOXNO):SetEememStart")
 }
 
-record (stringout, "$(P):BOX:$(BOXNO):protect_eemem")
+record (stringout, "$(P):BOX:$(BOXNO):ProtectEemem")
 {
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) protect_eemem termBox$(BOXNO)")
     field (PRIO, "HIGH")
+    field (FLNK, "$(P):BOX:$(BOXNO):SetEememEnd")
 }
 
-record (stringout, "$(P):BOX:$(BOXNO):reload_eemem")
+record (stringout, "$(P):BOX:$(BOXNO):ReloadEemem")
 {
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) reload_eemem termBox$(BOXNO)")
     field (PRIO, "HIGH")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):SetEememStart")
+{
+    field (INPA, "1")
+    field (CALC, "A")
+    field (OUT, "$(P):SetEememStatus.A")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):SetEememEnd")
+{
+    field (INPA, "0")
+    field (CALC, "A")
+    field (OUT, "$(P):SetEememStatus.A")
+}
+
+record (calcout, "$(P):SetEememStatus")
+{
+    field (INPA, "0")
+    field (CALC, "A")
+    field (SCAN, ".1 second")
 }
