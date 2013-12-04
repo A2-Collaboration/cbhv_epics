@@ -11,6 +11,33 @@ record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):InUse")
 {
 }
 
+######### mapping ##################
+
+record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):Element")
+{
+    field (VAL, "$(ELEMENTNO)")
+}
+
+record (stringin, "$(P):ELEMENT:$(ELEMENTNO):Channel")
+{
+    field (VAL, "$(BOXNO):$(LEVELNO):$(CHANNELNO)")
+}
+
+record (ai, "$(P):ELEMENT:$(ELEMENTNO):ChannelNumber")
+{
+    field (VAL, "$(CHANNELNO)")
+}
+
+record (ai, "$(P):ELEMENT:$(ELEMENTNO):LevelNumber")
+{
+    field (VAL, "$(LEVELNO)")
+}
+
+record (ai, "$(P):ELEMENT:$(ELEMENTNO):BoxNumber")
+{
+    field (VAL, "$(BOXNO)")
+}
+
 ######### Setting voltages #########
 
 record (ao, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):secret_set_volt")
@@ -147,6 +174,7 @@ record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
     field (LSV,"MINOR")
     field (LLSV,"MAJOR")
     field (FLNK, "$(P):BOX:$(BOXNO):ReadActive")
+    field (PREC, 1)
 }
 
 record (sel, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
@@ -155,7 +183,14 @@ record (sel, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
     field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):BoxVoltVariance")
     field (SELM, "Specified")
     field (NVL, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):InUse")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):AbsVoltVariance")
 
+}
+
+record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):AbsVoltVariance")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
+    field (CALC, "ABS(A)")
 }
 
 record (calcout, "$(P):BOX:$(BOXNO):ReadActive")
@@ -185,14 +220,14 @@ record (stringin, "$(P):BOX:$(BOXNO):ReadAdc")
 
 record (sel, "$(P):BOX:$(BOXNO):$(LEVELNO):Status")
 {
-    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):0:VoltVariance")
-    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):1:VoltVariance") 
-    field (INPC, "$(P):BOX:$(BOXNO):$(LEVELNO):2:VoltVariance")
-    field (INPD, "$(P):BOX:$(BOXNO):$(LEVELNO):3:VoltVariance") 
-    field (INPE, "$(P):BOX:$(BOXNO):$(LEVELNO):4:VoltVariance")
-    field (INPF, "$(P):BOX:$(BOXNO):$(LEVELNO):5:VoltVariance") 
-    field (INPG, "$(P):BOX:$(BOXNO):$(LEVELNO):6:VoltVariance")
-    field (INPH, "$(P):BOX:$(BOXNO):$(LEVELNO):7:VoltVariance") 
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):0:AbsVoltVariance")
+    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):1:AbsVoltVariance") 
+    field (INPC, "$(P):BOX:$(BOXNO):$(LEVELNO):2:AbsVoltVariance")
+    field (INPD, "$(P):BOX:$(BOXNO):$(LEVELNO):3:AbsVoltVariance") 
+    field (INPE, "$(P):BOX:$(BOXNO):$(LEVELNO):4:AbsVoltVariance")
+    field (INPF, "$(P):BOX:$(BOXNO):$(LEVELNO):5:AbsVoltVariance") 
+    field (INPG, "$(P):BOX:$(BOXNO):$(LEVELNO):6:AbsVoltVariance")
+    field (INPH, "$(P):BOX:$(BOXNO):$(LEVELNO):7:AbsVoltVariance") 
     field (SELM, "High Signal")
     field (SCAN, ".1 second")
 }
