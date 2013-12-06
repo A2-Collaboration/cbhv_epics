@@ -1,0 +1,6 @@
+record (stringin, "$(P):BOX:$(BOXNO):Read$(EELO)")
+{
+    field (DTYP, "stream")
+    field (INP, "@$(PROTO) read_eemem_value($(EEUP)) termBox$(BOXNO)")
+    field (SCAN, "I/O Intr")
+}

@@ -1,4 +1,7 @@
-################################### active channels #######################################
+
+###############
+################### channel usage
+###############
 
 record (ao, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):WriteInUse")
 {
@@ -11,7 +14,9 @@ record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):InUse")
 {
 }
 
-######### mapping ##################
+###############
+################### mapping
+###############
 
 record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):Element")
 {
@@ -38,7 +43,9 @@ record (ai, "$(P):ELEMENT:$(ELEMENTNO):BoxNumber")
     field (VAL, "$(BOXNO)")
 }
 
-######### Setting voltages #########
+###############
+################### setting voltages
+###############
 
 record (ao, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):secret_set_volt")
 {
@@ -153,7 +160,17 @@ record (calc, "$(P):IsActive")
     field (PRIO, "HIGH")
 }
 
-######### Reading voltages #########
+###############
+################### reading voltages
+###############
+
+record (stringin, "$(P):BOX:$(BOXNO):ReadAdc")
+{
+    field (DTYP, "stream")
+    field (INP, "@$(PROTO) read_adc termBox$(BOXNO)")
+    field (SCAN, ".1 second")
+    field (PRIO, "LOW")
+}
 
 record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
 {
@@ -177,22 +194,6 @@ record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
     field (PREC, 1)
 }
 
-record (sel, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
-{
-    field (INPA, 0)
-    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):BoxVoltVariance")
-    field (SELM, "Specified")
-    field (NVL, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):InUse")
-    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):AbsVoltVariance")
-
-}
-
-record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):AbsVoltVariance")
-{
-    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
-    field (CALC, "ABS(A)")
-}
-
 record (calcout, "$(P):BOX:$(BOXNO):ReadActive")
 {
     field (INPA, "0")
@@ -210,12 +211,20 @@ record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):BoxVoltVariance")
     field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
 }
 
-record (stringin, "$(P):BOX:$(BOXNO):ReadAdc")
+record (sel, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
 {
-    field (DTYP, "stream")
-    field (INP, "@$(PROTO) read_adc termBox$(BOXNO)")
-    field (SCAN, ".1 second")
-    field (PRIO, "LOW")
+    field (INPA, 0)
+    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):BoxVoltVariance")
+    field (SELM, "Specified")
+    field (NVL, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):InUse")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):AbsVoltVariance")
+
+}
+
+record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):AbsVoltVariance")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
+    field (CALC, "ABS(A)")
 }
 
 record (sel, "$(P):BOX:$(BOXNO):$(LEVELNO):Status")
@@ -243,7 +252,9 @@ record (sel, "$(P):BOX:$(BOXNO):Status")
     field (SCAN, ".1 second")
 }
 
-######### Temperature #########
+###############
+################### Temperature
+###############
 
 #record (stringin, "$(P):TEMP:ReadTemp")
 #{

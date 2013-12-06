@@ -43,7 +43,7 @@ file "cbhvtest_voltage.db"
 		{cbhvtest.proto, CB:CB:HV, 19, 4, 7, 759, l4ch7, 1}
 }
 
-file "cbhvtest_eemem.db" 
+file "cbhvtest_eemem_read.db" 
 {
 	pattern {PROTO, P, BOXNO, EELO, EEUP}
 		{cbhvtest.proto, CB:CB:HV, 19, Dhcp, DHCP}
@@ -62,13 +62,34 @@ file "cbhvtest_eemem.db"
 		{cbhvtest.proto, CB:CB:HV, 19, Mem, MEM}
 		{cbhvtest.proto, CB:CB:HV, 19, File, FILE}
 		{cbhvtest.proto, CB:CB:HV, 19, Reg_div, REG_DIV}
-		{cbhvtest.proto, CB:CB:HV, 19, Cards, CARDS}
 		{cbhvtest.proto, CB:CB:HV, 19, Umax, UMAX}
 		{cbhvtest.proto, CB:CB:HV, 19, Mac, MAC}
 		{cbhvtest.proto, CB:CB:HV, 19, Lease, LEASE}
 		{cbhvtest.proto, CB:CB:HV, 19, Reg, REG}
 		{cbhvtest.proto, CB:CB:HV, 19, Regn, REGN}
 }
+
+file "cbhvtest_eemem_set.db" 
+{
+	pattern {PROTO, P, BOXNO, EELO, EEUP}
+		{cbhvtest.proto, CB:CB:HV, 19, Dhcp, DHCP}
+		{cbhvtest.proto, CB:CB:HV, 19, Ip, IP}
+		{cbhvtest.proto, CB:CB:HV, 19, Mask, MASK}
+		{cbhvtest.proto, CB:CB:HV, 19, Gate, GATE}
+		{cbhvtest.proto, CB:CB:HV, 19, Dns, DNS}
+		{cbhvtest.proto, CB:CB:HV, 19, Ntpserver, NTPSERVER}
+		{cbhvtest.proto, CB:CB:HV, 19, Utczone, UTCZONE}
+		{cbhvtest.proto, CB:CB:HV, 19, Ntp, NTP}
+		{cbhvtest.proto, CB:CB:HV, 19, Umin, UMIN}
+		{cbhvtest.proto, CB:CB:HV, 19, Levels, LEVELS}
+		{cbhvtest.proto, CB:CB:HV, 19, Mem, MEM}
+		{cbhvtest.proto, CB:CB:HV, 19, File, FILE}
+		{cbhvtest.proto, CB:CB:HV, 19, Reg_div, REG_DIV}
+		{cbhvtest.proto, CB:CB:HV, 19, Umax, UMAX}
+		{cbhvtest.proto, CB:CB:HV, 19, Mac, MAC}
+		{cbhvtest.proto, CB:CB:HV, 19, Lease, LEASE}
+		{cbhvtest.proto, CB:CB:HV, 19, Reg, REG}
+		{cbhvtest.proto, CB:CB:HV, 19, Regn, REGN}
 
 file "cbhvtest_eemem_nm.db"
 {
