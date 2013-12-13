@@ -32,17 +32,9 @@ record (stringout, "$(P):BOX:$(BOXNO):UnprotectEememCards")
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) unprotect_eemem termBox$(BOXNO)")
     field (PRIO, "HIGH")
-    field (FLNK, "$(P):BOX:$(BOXNO):SetEememStartCards")
 }
 
-record (calcout, "$(P):BOX:$(BOXNO):SetEememStartCards")
-{
-    field (INPA, "1")
-    field (CALC, "A")
-    field (OUT, "$(P):SetEememStatus.A")
-}
-
-record (stringout, "$(P):BOX:$(BOXNO):SetCards")
+record (stringout, "$(P):BOX:$(BOXNO):SetCardsAndMN")
 {
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) set_eemem_value(CARDS) termBox$(BOXNO)")
@@ -85,14 +77,6 @@ record (stringout, "$(P):BOX:$(BOXNO):ProtectEememCards")
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) protect_eemem termBox$(BOXNO)")
     field (PRIO, "HIGH")
-    field (FLNK, "$(P):BOX:$(BOXNO):SetEememEndCards")
-}
-
-record (calcout, "$(P):BOX:$(BOXNO):SetEememEndCards")
-{
-    field (INPA, "0")
-    field (CALC, "A")
-    field (OUT, "$(P):SetEememStatus.A")
     field (FLNK, "$(P):BOX:$(BOXNO):PrintEememCards")
 }
 

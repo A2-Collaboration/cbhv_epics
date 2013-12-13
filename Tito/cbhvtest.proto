@@ -266,6 +266,8 @@ read_temp
 {
 out "READTEMP";
 in "%*#s";
+ReplyTimeout = 50000;
+ReadTimeout = 50000;
 }
 
 read_temp0

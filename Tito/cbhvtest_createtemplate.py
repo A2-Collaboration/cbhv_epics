@@ -12,15 +12,34 @@ import time, sys
 
 #    box = sys.argv[1]
 
-#f = open ("cbhv_elements.txt", 'r')
+#f = open ("cbhv_all_channel_element_map.txt", 'r')
 
 #werte=f.readlines()
 
 #f.close
 
-#count = 1
-
 g = open ("cbhv2.sub", "w")
+
+#count = 0
+
+#while count < len(werte):
+
+#	zeilenwerte = werte[count].split()
+#	element = zeilenwerte[3]
+#	box = zeilenwerte[0]
+#	level = zeilenwerte[1]
+#	channel = zeilenwerte[2]
+
+#	if element == '1000':
+
+#		usage = 0
+#	else:
+#
+#		usage = 1
+#
+#	g.write("\t\t{cbhvtest.proto, CB:CB:HV, %s, %s, %s, %s, %s}\n" % (box, level, channel, element, usage))
+#	g.write("\t\t<pv trig=\"false\">CB:CB:HV:ELEMENT:%s:SetVolt</pv>\n\t\t<pv trig=\"false\">CB:CB:HV:ELEMENT:%s:Channel</pv>\n" % (element, element))
+#	count+=1
 
 #g.write("file \"cbhvtest.db\" \n{\n\tpattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO, ELEMENTNO, CHAROFFSET}\n")
 
@@ -42,20 +61,26 @@ g = open ("cbhv2.sub", "w")
         # uncomment next lines to generate text for adding epics pvs to css widgets
 #        if (len(zeilenwerte) == 4):
 
-level = 0
+box = 1
 
-while level < 5:
+while box < 20:
 
-	channel = 0
+	level = 0
 
-	while channel < 8:
+	while level < 5:
 
-#		g.write("\t\t<pv trig=\"false\">CB:CB:HV:BOX:19:%s:%s:WriteInUse</pv>\n\t\t<pv trig=\"false\">CB:CB:HV:BOX:19:%s:%s:InUse</pv>\n" % (level, channel, level, channel))
-		g.write("\t\t<pv trig=\"false\">CB:CB:HV:BOX:19:%s:%s:LatestSetVolt</pv>\n\t\t<pv trig=\"false\">CB:CB:HV:BOX:19:%s:%s:InUse</pv>\n" % (level, channel, level, channel))
+		channel = 0
 
-		channel+=1
+		while channel < 8:
 
-	level+=1
+#			g.write("\t\t<pv trig=\"false\">CB:CB:HV:BOX:%s:%s:%s:LatestSetVolt</pv>\n\t\t<pv trig=\"false\">CB:CB:HV:BOX:%s:%s:%s:InUse</pv>\n" % (box, level, channel, box, level, channel))
+#			g.write("\t\t<pv trig=\"false\">CB:CB:HV:BOX:%s:%s:%s:SetVolt</pv>\n\t\t<pv trig=\"false\">CB:CB:HV:BOX:%s:%s:%s:Element</pv>\n" % (box, level, channel, box, level, channel))
+			g.write("\t\t{cbhvtest.proto, CB:CB:HV, %s, %s, %s, N}\n\t\t{cbhvtest.proto, CB:CB:HV, %s, %s, %s, M}\n" % (box, level, channel, box, level, channel))
+
+			channel+=1
+
+		level+=1
+	box+=1
 
 
         # uncomment the following lines to create testvalues for a file consisting of elements and voltage values seperated via a tab

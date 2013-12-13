@@ -10,7 +10,6 @@ record (stringout, "$(P):BOX:$(BOXNO):UnprotectEemem")
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) unprotect_eemem termBox$(BOXNO)")
     field (PRIO, "HIGH")
-    field (FLNK, "$(P):BOX:$(BOXNO):SetEememStart")
 }
 
 record (stringout, "$(P):BOX:$(BOXNO):Set$(EELO)")
@@ -25,7 +24,6 @@ record (stringout, "$(P):BOX:$(BOXNO):ProtectEemem")
     field (DTYP, "stream")
     field (OUT, "@$(PROTO) protect_eemem termBox$(BOXNO)")
     field (PRIO, "HIGH")
-    field (FLNK, "$(P):BOX:$(BOXNO):SetEememEnd")
 }
 
 record (stringout, "$(P):BOX:$(BOXNO):ReloadEemem")
@@ -41,25 +39,4 @@ record (stringout, "$(P):BOX:$(BOXNO):PrintEemem")
     field (OUT, "@$(PROTO) eemem_print termBox$(BOXNO)")
     field (PRIO, "HIGH")
     field (PINI, "YES")
-}
-
-record (calcout, "$(P):BOX:$(BOXNO):SetEememStart")
-{
-    field (INPA, "1")
-    field (CALC, "A")
-    field (OUT, "$(P):SetEememStatus.A")
-}
-
-record (calcout, "$(P):BOX:$(BOXNO):SetEememEnd")
-{
-    field (INPA, "0")
-    field (CALC, "A")
-    field (OUT, "$(P):SetEememStatus.A")
-}
-
-record (calcout, "$(P):SetEememStatus")
-{
-    field (INPA, "0")
-    field (CALC, "A")
-#    field (SCAN, ".1 second")
 }
