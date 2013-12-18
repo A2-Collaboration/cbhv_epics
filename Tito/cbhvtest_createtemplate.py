@@ -12,15 +12,15 @@ import time, sys
 
 #    box = sys.argv[1]
 
-#f = open ("cbhv_all_channel_element_map.txt", 'r')
+f = open ("cbhv_all_channel_element_map.txt", 'r')
 
-#werte=f.readlines()
+werte=f.readlines()
 
-#f.close
+f.close
 
 g = open ("cbhv2.sub", "w")
 
-#count = 0
+count = 0
 
 #while count < len(werte):
 
@@ -41,10 +41,26 @@ g = open ("cbhv2.sub", "w")
 #	g.write("\t\t<pv trig=\"false\">CB:CB:HV:ELEMENT:%s:SetVolt</pv>\n\t\t<pv trig=\"false\">CB:CB:HV:ELEMENT:%s:Channel</pv>\n" % (element, element))
 #	count+=1
 
-#g.write("file \"cbhvtest.db\" \n{\n\tpattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO, ELEMENTNO, CHAROFFSET}\n")
+g.write("file \"cbhvtest.db\" \n{\n\tpattern {PROTO, P, BOXNO, LEVELNO, CHANNELNO, ELEMENTNO, ADC, TDC, USAGE}\n")
 
-#while (count<len(werte)):
-#	zeilenwerte =  werte[count].split()
+while (count<len(werte)):
+	zeilenwerte =  werte[count].split()
+	box = zeilenwerte[0]
+	level = zeilenwerte[1]
+	channel = zeilenwerte[2]
+	element = int(zeilenwerte[3])
+	adc = zeilenwerte[4]
+	tdc = zeilenwerte[5]
+
+	if element == 1000:
+
+		usage = 0
+
+	else:
+
+		usage = 1
+
+
 
         # uncomment next line to generate .sub file for 1 specific box
         # if (len(zeilenwerte) == 4 and zeilenwerte[1] == box):
@@ -61,26 +77,27 @@ g = open ("cbhv2.sub", "w")
         # uncomment next lines to generate text for adding epics pvs to css widgets
 #        if (len(zeilenwerte) == 4):
 
-box = 1
+#box = 1
 
-while box < 20:
+#while box < 20:
 
-	level = 0
+#	level = 0
 
-	while level < 5:
+#	while level < 5:
 
-		channel = 0
+#		channel = 0
 
-		while channel < 8:
+#		while channel < 8:
 
 #			g.write("\t\t<pv trig=\"false\">CB:CB:HV:BOX:%s:%s:%s:LatestSetVolt</pv>\n\t\t<pv trig=\"false\">CB:CB:HV:BOX:%s:%s:%s:InUse</pv>\n" % (box, level, channel, box, level, channel))
 #			g.write("\t\t<pv trig=\"false\">CB:CB:HV:BOX:%s:%s:%s:SetVolt</pv>\n\t\t<pv trig=\"false\">CB:CB:HV:BOX:%s:%s:%s:Element</pv>\n" % (box, level, channel, box, level, channel))
-			g.write("\t\t{cbhvtest.proto, CB:CB:HV, %s, %s, %s, N}\n\t\t{cbhvtest.proto, CB:CB:HV, %s, %s, %s, M}\n" % (box, level, channel, box, level, channel))
+	g.write("\t\t{cbhvtest.proto, CB:CB:HV, %s, %s, %s, %s, %s, %s, %s}\n" % (box, level, channel, element, adc, tdc, usage))
+	count+=1
 
-			channel+=1
+#			channel+=1
 
-		level+=1
-	box+=1
+#		level+=1
+#	box+=1
 
 
         # uncomment the following lines to create testvalues for a file consisting of elements and voltage values seperated via a tab

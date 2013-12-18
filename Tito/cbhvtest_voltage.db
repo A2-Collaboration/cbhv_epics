@@ -357,6 +357,66 @@ record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
     field (PREC, 1)
 }
 
+record (ai, "$(P):ELEMENT:$(ELEMENTNO):ReadVolt")
+{
+    field (INP, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
+    field (SCAN, ".1 second")
+    field (PACT, "")
+    field (STAT, "")
+    field (SEVR, "")
+    field (VAL, "")
+    field (HIHI, 1650)
+    field (HIGH, "")
+    field (LOW, "")
+    field (LOLO, 1250)
+    field (HHSV,"MAJOR")
+    field (HSV,"MINOR")
+    field (LSV,"MINOR")
+    field (LLSV,"MAJOR")
+    field (FLNK, "$(P):BOX:$(BOXNO):ReadActive")
+    field (PREC, 1)
+}
+
+record (ai, "$(P):ADC:$(ADCNO):ReadVolt")
+{
+    field (INP, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
+    field (SCAN, ".1 second")
+    field (PACT, "")
+    field (STAT, "")
+    field (SEVR, "")
+    field (VAL, "")
+    field (HIHI, 1650)
+    field (HIGH, "")
+    field (LOW, "")
+    field (LOLO, 1250)
+    field (HHSV,"MAJOR")
+    field (HSV,"MINOR")
+    field (LSV,"MINOR")
+    field (LLSV,"MAJOR")
+    field (FLNK, "$(P):BOX:$(BOXNO):ReadActive")
+    field (PREC, 1)
+}
+
+record (ai, "$(P):TDC:$(TDCNO):ReadVolt")
+{
+    field (INP, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
+    field (SCAN, ".1 second")
+    field (PACT, "")
+    field (STAT, "")
+    field (SEVR, "")
+    field (VAL, "")
+    field (HIHI, 1650)
+    field (HIGH, "")
+    field (LOW, "")
+    field (LOLO, 1250)
+    field (HHSV,"MAJOR")
+    field (HSV,"MINOR")
+    field (LSV,"MINOR")
+    field (LLSV,"MAJOR")
+    field (FLNK, "$(P):BOX:$(BOXNO):ReadActive")
+    field (PREC, 1)
+}
+
 # After successfully reading a voltage value some things needs to be
 # done. As mentioned in the beginning of the section, this time the
 # sequence of different records is not coordinated via a fanout record

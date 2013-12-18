@@ -1,3 +1,14 @@
+# In this file are all the records to read and write the
+# M<levelnumber> and N<levelnumber> values of all boxes
+
+# The record below reads all M and N values. The problem is that the
+# values as they are stored in the box eemem memory are too long to
+# fit into a single pv because of the limitation of a maximum of 40
+# characters. Because of this not a full line like 'M0=....' but every
+# value of a line is read by the record. So there exists one pv for
+# the N and M value of every channel of a box instead of just one
+# string containing the info of an entire level.
+
 record (ai, "$(P):BOX:$(BOXNO):Read$(LETTER)$(LEVELNO)_$(CHANNELNO)")
 {
     field (DTYP, "stream")
@@ -5,9 +16,24 @@ record (ai, "$(P):BOX:$(BOXNO):Read$(LETTER)$(LEVELNO)_$(CHANNELNO)")
     field (SCAN, "I/O Intr")
 }
 
+# As there is no way the N and M values for one level can be
+# transfered within one record due to the limitation of 40 characters,
+# the record below creates pvs to write a value for every single
+# channel. However the pvs created by this record do not really write
+# their values to the eemem directly, they are only there to store the
+# values - the record below this one does the magic.
+
 record (ai, "$(P):BOX:$(BOXNO):Write$(LETTER)$(LEVELNO)_$(CHANNELNO)")
 {
 }
+
+# When the record below is processed, it fetches the values that are
+# hopefully stored in the pvs in the 'INP' fields. The protocol for
+# this records does not call the value this reocrd is calculating - as
+# it is not calculating one at all - but obtains the values from the
+# pvs in the input fields, concatenates them to the string the box
+# needs and sends it via telnet. For more details on this trick
+# consult the streamapp webpage.
 
 record (calcout, "$(P):BOX:$(BOXNO):Set$(LETTER)$(LEVELNO)")
 {
@@ -26,6 +52,27 @@ record (calcout, "$(P):BOX:$(BOXNO):Set$(LETTER)$(LEVELNO)")
     field (PRIO, "HIGH")
     field (SCAN, "Passive")
 }
+
+# As the eemem value 'Cards' should not be changeable separately, this
+# value is not within the pattern for the 'cbhvtest_eemem_set.db' file
+# in the 'cbhvtest.sub' file. And because there seems to be a problem
+# when epics should process records from different .db files in a
+# specific order the records to protect, unprotect, reload and print
+# the eemem are also in this file with the additional word Cards to
+# not interfere with the records in the cbhvtest_eemem_set.db
+# (otherwise they would have the same name = double definition).
+
+# To change the 'Cards' numbers and the according N and M values and
+# to reuse the most protocols and so one the following idea was born:
+# After setting the 'Write$(LETTER)$(LEVELNO)_$(CHANNELNO)' pvs for
+# the desired box (have fun setting 80 values!), the user has to first
+# process the 'UnprotectEememCards' record. Then all that has to be
+# done is to process the 'SetCardsAndNM' record with the numbers of
+# the cards separated by ','. After this all other records will be
+# processed by forward links (look at the 'FLNK' fields) one after the
+# other doing everything to set all values (Cards and all N and M
+# values), reload and print the eemem so that the new values appear in
+# the according 'Read<Eememvalue>' pvs and to protect the eemem again.
 
 record (stringout, "$(P):BOX:$(BOXNO):UnprotectEememCards")
 {
