@@ -1,13 +1,249 @@
+l0ch1 = "%*d,%*f,%f";
+l0ch2 = "%*d,%*f,%*f,%f";
+l0ch3 = "%*d,%*f,%*f,%*f,%f";
+l0ch4 = "%*d,%*f,%*f,%*f,%*f,%f";
+l0ch5 = "%*d,%*f,%*f,%*f,%*f,%*f,%f";
+l0ch6 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+l0ch7 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+l1ch0 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%f";
+l1ch1 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%f";
+l1ch2 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%f";
+l1ch3 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%f";
+l1ch4 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%f";
+l1ch5 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%f";
+l1ch6 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+l1ch7 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+l2ch0 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%f";
+l2ch1 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%f";
+l2ch2 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%f";
+l2ch3 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%f";
+l2ch4 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%f";
+l2ch5 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%f";
+l2ch6 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+l2ch7 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+l3ch0 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%f";
+l3ch1 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%f";
+l3ch2 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%f";
+l3ch3 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%f";
+l3ch4 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%f";
+l3ch5 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%f";
+l3ch6 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+l3ch7 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+l4ch0 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%f";
+l4ch1 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%f";
+l4ch2 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%f";
+l4ch3 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%f";
+l4ch4 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%f";
+l4ch5 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%f";
+l4ch6 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+l4ch7 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+
 OutTerminator = CR LF;
 InTerminator = ">";
 pollperiod = 1;
 #ReplyTimeout = 6000;
 LockTimeout = 300000;
 #WriteTimeout = 200000;
+extraInput = ignore;
 
-read_voltage
+read_voltagel0ch0
 {
-in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*\$1c%f%*#s";
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c%*d,%f%*#s";
+}
+
+read_voltagel0ch1
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l0ch1;
+}
+
+read_voltagel0ch2
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l0ch2;
+}
+
+read_voltagel0ch3
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l0ch3;
+}
+
+read_voltagel0ch4
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l0ch4;
+}
+
+read_voltagel0ch5
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l0ch5;
+}
+
+read_voltagel0ch6
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l0ch6;
+}
+
+read_voltagel0ch7
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l0ch7;
+}
+
+read_voltagel1ch0
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l1ch0;
+}
+
+read_voltagel1ch1
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l1ch1;
+}
+
+read_voltagel1ch2
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l1ch2;
+}
+
+read_voltagel1ch3
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l1ch3
+}
+
+read_voltagel1ch4
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l1ch4;
+}
+
+read_voltagel1ch5
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l1ch5;
+}
+
+read_voltagel1ch6
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l1ch6;
+}
+
+read_voltagel1ch7
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l1ch7;
+}
+
+read_voltagel2ch0
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l2ch0;
+}
+
+read_voltagel2ch1
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l2ch1
+}
+
+read_voltagel2ch2
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l2ch2;
+}
+
+read_voltagel2ch3
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l2ch3;
+}
+
+read_voltagel2ch4
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l2ch4;
+}
+
+read_voltagel2ch5
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l2ch5;
+}
+
+read_voltagel2ch6
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l2ch6;
+}
+
+read_voltagel2ch7
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l2ch7;
+}
+
+read_voltagel3ch0
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l3ch0;
+}
+
+read_voltagel3ch1
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l3ch1;
+}
+
+read_voltagel3ch2
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l3ch2;
+}
+
+read_voltagel3ch3
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l3ch3;
+}
+
+read_voltagel3ch4
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l3ch4;
+}
+
+read_voltagel3ch5
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l3ch5;
+}
+
+read_voltagel3ch6
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l3ch6;
+}
+
+read_voltagel3ch7
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l3ch7;
+}
+
+read_voltagel4ch0
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l4ch0;
+}
+
+read_voltagel4ch1
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l4ch1;
+}
+
+read_voltagel4ch2
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l4ch2;
+}
+
+read_voltagel4ch3
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l4ch3;
+}
+
+read_voltagel4ch4
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l4ch4;
+}
+
+read_voltagel4ch5
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l4ch5;
+}
+
+read_voltagel4ch6
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l4ch6;
+}
+
+read_voltagel4ch7
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l4ch7;
 }
 
 read_adc
@@ -30,6 +266,8 @@ read_temp
 {
 out "READTEMP";
 in "%*#s";
+ReplyTimeout = 50000;
+ReadTimeout = 50000;
 }
 
 read_temp0
@@ -51,12 +289,18 @@ in "           | Temperatur %*168c%7f%*#s";
 
 eemem_print
 {
-out "eemem %s";
-in "%s";
+wait = 1000;
+out "eemem print";
+in "Config%#s";
 InTerminator = ">";
 ReplyTimeout = 25000;
 ReadTimeout = 25000;
 extraInput=ignore;
+@mismatch
+{
+out "eemem print";
+in "Config%#s";
+}
 }
 
 read_eemem_value 
@@ -118,6 +362,75 @@ reload_eemem
 extraInput = ignore;
 out "read_config";
 in "Konfiguration aus EEPROM %*s";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
+}
+
+####################### eemem M and N values ###############
+
+read_mnx0
+{
+in "\$1\$2=%f";
+InTerminator = CR LF;
+extraInput = ignore;
+}
+
+read_mnx1
+{
+in "\$1\$2=%*f,%f";
+InTerminator = CR LF;
+extraInput = ignore;
+}
+
+read_mnx2
+{
+in "\$1\$2=%*f,%*f,%f";
+InTerminator = CR LF;
+extraInput = ignore;
+}
+
+read_mnx3
+{
+in "\$1\$2=%*f,%*f,%*f,%f";
+InTerminator = CR LF;
+extraInput = ignore;
+}
+
+read_mnx4
+{
+in "\$1\$2=%*f,%*f,%*f,%*f,%f";
+InTerminator = CR LF;
+extraInput = ignore;
+}
+
+read_mnx5
+{
+in "\$1\$2=%*f,%*f,%*f,%*f,%*f,%f";
+InTerminator = CR LF;
+extraInput = ignore;
+}
+
+read_mnx6
+{
+in "\$1\$2=%*f,%*f,%*f,%*f,%*f,%*f,%f";
+InTerminator = CR LF;
+extraInput = ignore;
+}
+
+read_mnx7
+{
+in "\$1\$2=%*f,%*f,%*f,%*f,%*f,%*f,%*f,%f";
+InTerminator = CR LF;
+extraInput = ignore;
+}
+
+set_nmx
+{
+extraInput = ignore;
+out "eemem del \$1\$2";
+in "";
+out "eemem add \$1\$2 %(A)f,%(B)f,%(C)f,%(D)f,%(E)f,%(F)f,%(G)f,%(H)f";
+in "";
 ReplyTimeout = 25000;
 ReadTimeout = 25000;
 }

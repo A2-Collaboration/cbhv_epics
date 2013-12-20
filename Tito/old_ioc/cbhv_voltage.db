@@ -1,0 +1,218 @@
+######### Setting voltages #########
+
+record (ao, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):secret_set_volt")
+{
+    field (DESC, "Used to set voltages by box")
+    field (EGU, "Volt")
+    field (LINR, "NO CONVERSION")
+    field (DTYP, "stream")
+    field (OUT, "@$(PROTO) set_voltage($(LEVELNO),$(CHANNELNO)) termBox$(BOXNO)")
+    field (PRIO, "HIGH")
+    field (PACT, "")    
+}
+
+record (ao, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):SetVolt")
+{
+    field (DESC, "Used to set voltages by box")
+    field (EGU, "Volt")
+    field (LINR, "NO CONVERSION")
+    field (DTYP, "stream")
+    field (OUT,  "@$(PROTO) set_voltage($(LEVELNO),$(CHANNELNO)) termBox$(BOXNO)")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVoltChannel")
+    field (PRIO, "HIGH")
+    field (PACT, "")    
+}
+
+record (ao, "$(P):ELEMENT:$(ELEMENTNO):SetVolt")
+{
+    field (DESC, "Used to set voltages by element")
+    field (EGU, "Volt")
+    field (LINR, "NO CONVERSION")
+    field (DTYP, "stream")
+    field (OUT,  "@$(PROTO) set_voltage($(LEVELNO),$(CHANNELNO)) termBox$(BOXNO)")
+    field (FLNK, "$(P):ELEMENT:$(ELEMENTNO):LatestSetVoltElement")
+    field (PRIO, "HIGH")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVoltChannel")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):SetVolt")
+    field (CALC, "A")
+    field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVolt.A")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVolt")
+    field (PRIO, "HIGH")
+}
+
+record (calcout, "$(P):ELEMENT:$(ELEMENTNO):LatestSetVoltElement")
+{
+    field (INPA, "$(P):ELEMENT:$(ELEMENTNO):SetVolt")
+    field (CALC, "A")
+    field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVolt.A")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVolt")
+    field (PRIO, "HIGH")
+
+}
+
+record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVolt")
+{
+    field (INPA, "0")
+    field (CALC, "A")
+    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):SetVoltPostprocessing")
+    field (PRIO, "HIGH")
+
+}
+
+record (fanout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):SetVoltPostprocessing")
+{
+    field (LNK1, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):SetLow")
+    field (LNK2, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):SetHigh")
+    field (LNK3, "$(P):BOX:$(BOXNO):SetActive")
+    field (PRIO, "HIGH")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):SetLow")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVolt")
+    field (INPB, "2")
+    field (CALC, "A-B")
+    field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt.LOW")
+    field (PRIO, "HIGH")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):SetHigh")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVolt")
+    field (INPB, "2")
+    field (CALC, "A+B")
+    field (OUT, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt.HIGH")
+    field (PRIO, "HIGH")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):SetActive")
+{
+    field (INPA, "1")
+    field (CALC, "A")
+    field (OUT, "$(P):BOX:$(BOXNO):IsActive.A")
+    field (PRIO, "HIGH")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):IsActive")
+{
+    field (INPA, "0")
+    field (CALC, "A")
+    field (SCAN, ".1 second")
+    field (PRIO, "HIGH")
+    field (OUT, "$(P):IsActive.A")
+}
+
+record (calc, "$(P):IsActive")
+{
+    field (INPA, "0")
+    field (CALC, "A")
+    field (SCAN, ".1 second")
+    field (PRIO, "HIGH")
+}
+
+######### Reading voltages #########
+
+record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
+{
+    field (DESC, "$(ELEMENTNO)")
+    field (DTYP, "stream")
+    field (INP, "@$(PROTO) read_voltage($(CHAROFFSET)) termBox$(BOXNO)")
+    field (SCAN, "I/O Intr")
+    field (PACT, "")
+    field (STAT, "")
+    field (SEVR, "")
+    field (VAL, "")
+    field (HIHI, 1650)
+    field (HIGH, "")
+    field (LOW, "")
+    field (LOLO, 1250)
+    field (HHSV,"MAJOR")
+    field (HSV,"MINOR")
+    field (LSV,"MINOR")
+    field (LLSV,"MAJOR")
+    field (FLNK, "$(P):BOX:$(BOXNO):ReadActive")
+}
+
+record (calcout, "$(P):BOX:$(BOXNO):ReadActive")
+{
+    field (INPA, "0")
+    field (CALC, "A")
+    field (OUT, "$(P):BOX:$(BOXNO):IsActive.A")
+#    field (FLNK, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
+}
+
+record (calc, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):VoltVariance")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
+    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):LatestSetVolt")
+    field (CALC, "A-B")
+    field (SCAN, ".1 second")
+    field (PRIO, "HIGH")
+}
+
+record (stringin, "$(P):BOX:$(BOXNO):ReadAdc")
+{
+    field (DTYP, "stream")
+    field (INP, "@$(PROTO) read_adc termBox$(BOXNO)")
+    field (SCAN, ".1 second")
+    field (PRIO, "LOW")
+}
+
+record (sel, "$(P):BOX:$(BOXNO):$(LEVELNO):Status")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):$(LEVELNO):0:ReadVolt.STAT")
+    field (INPB, "$(P):BOX:$(BOXNO):$(LEVELNO):1:ReadVolt.STAT") 
+    field (INPC, "$(P):BOX:$(BOXNO):$(LEVELNO):2:ReadVolt.STAT")
+    field (INPD, "$(P):BOX:$(BOXNO):$(LEVELNO):3:ReadVolt.STAT") 
+    field (INPE, "$(P):BOX:$(BOXNO):$(LEVELNO):4:ReadVolt.STAT")
+    field (INPF, "$(P):BOX:$(BOXNO):$(LEVELNO):5:ReadVolt.STAT") 
+    field (INPG, "$(P):BOX:$(BOXNO):$(LEVELNO):6:ReadVolt.STAT")
+    field (INPH, "$(P):BOX:$(BOXNO):$(LEVELNO):7:ReadVolt.STAT") 
+    field (SELM, "High Signal")
+    field (SCAN, ".1 second")
+}
+
+record (sel, "$(P):BOX:$(BOXNO):Status")
+{
+    field (INPA, "$(P):BOX:$(BOXNO):0:Status")
+    field (INPB, "$(P):BOX:$(BOXNO):1:Status") 
+    field (INPC, "$(P):BOX:$(BOXNO):2:Status")
+    field (INPD, "$(P):BOX:$(BOXNO):3:Status") 
+    field (INPE, "$(P):BOX:$(BOXNO):4:Status")
+    field (SELM, "High Signal")
+    field (SCAN, ".1 second")
+}
+
+######### Temperature #########
+
+record (stringin, "$(P):Temp:read_temp")
+{
+    field (DTYP, "stream")
+    field (INP,"@$(PROTO) read_temp termBox1")
+    field (SCAN, ".1 second")
+    field (PRIO, "HIGH")
+}
+
+record (ai, "$(P):Temp:0")
+{
+    field (DTYP, "stream")
+    field (INP,"@$(PROTO) read_temp0 termBox1")
+    field (SCAN, "I/O Intr")
+}
+
+record (ai, "$(P):Temp:1")
+{
+    field (DTYP, "stream")
+    field (INP, "@$(PROTO) read_temp1 termBox1")
+    field (SCAN, "I/O Intr")
+}
+
+record (ai, "$(P):Temp:2")
+{
+    field (DTYP, "stream")
+    field (INP,"@$(PROTO) read_temp2 termBox1")
+    field (SCAN, "I/O Intr")
+}

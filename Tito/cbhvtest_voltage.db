@@ -357,6 +357,11 @@ record (ai, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
     field (PREC, 1)
 }
 
+# The following records where added to display voltage values also
+# using the element, ADC and TDC number. All these records do is
+# periodically scanning the only 'real' reading record and obtaining
+# the according voltage values.
+
 record (ai, "$(P):ELEMENT:$(ELEMENTNO):ReadVolt")
 {
     field (INP, "$(P):BOX:$(BOXNO):$(LEVELNO):$(CHANNELNO):ReadVolt")
@@ -373,7 +378,6 @@ record (ai, "$(P):ELEMENT:$(ELEMENTNO):ReadVolt")
     field (HSV,"MINOR")
     field (LSV,"MINOR")
     field (LLSV,"MAJOR")
-    field (FLNK, "$(P):BOX:$(BOXNO):ReadActive")
     field (PREC, 1)
 }
 
@@ -393,7 +397,6 @@ record (ai, "$(P):ADC:$(ADCNO):ReadVolt")
     field (HSV,"MINOR")
     field (LSV,"MINOR")
     field (LLSV,"MAJOR")
-    field (FLNK, "$(P):BOX:$(BOXNO):ReadActive")
     field (PREC, 1)
 }
 
@@ -413,7 +416,6 @@ record (ai, "$(P):TDC:$(TDCNO):ReadVolt")
     field (HSV,"MINOR")
     field (LSV,"MINOR")
     field (LLSV,"MAJOR")
-    field (FLNK, "$(P):BOX:$(BOXNO):ReadActive")
     field (PREC, 1)
 }
 

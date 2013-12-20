@@ -1,0 +1,123 @@
+OutTerminator = CR LF;
+InTerminator = ">";
+pollperiod = 1;
+#ReplyTimeout = 6000;
+LockTimeout = 300000;
+#WriteTimeout = 200000;
+
+read_voltage
+{
+in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*\$1c%f%*#s";
+}
+
+read_adc
+{
+out "read_adc csv";
+in "%*#s";
+ReplyTimeout = 5000;
+ReadTimeout = 5000;
+}
+
+set_voltage 
+{
+out "SetVpmF \$1 \$2 %f";
+in "%*#s";
+ReplyTimeout = 50000;
+ReadTimeout = 50000;
+}
+
+read_temp
+{
+out "READTEMP";
+in "%*#s";
+}
+
+read_temp0
+{
+in "           | Temperatur %*113c%7f%*#s";
+}
+
+read_temp1
+{
+in "           | Temperatur %*141c%7f%*#s";
+}
+
+read_temp2
+{
+in "           | Temperatur %*168c%7f%*#s";
+}
+
+####################### read and write eemem values ########################
+
+eemem_print
+{
+out "eemem %s";
+in "%s";
+InTerminator = ">";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
+extraInput=ignore;
+}
+
+read_eemem_value 
+{
+in "\$1=%s";
+InTerminator = CR LF;
+extraInput = ignore;
+}
+
+set_eemem_value_standalone 
+{
+extraInput = ignore;
+out "eemem unprotect";
+in "unprotectet";
+out "eemem del \$1";
+in "";
+out "eemem add \$1 %s";
+in "";
+out "eemem protect";
+in "";
+out "eemem print";
+in "%*s";
+out "read_config";
+in "Konfiguration aus EEPROM %*s";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
+}
+
+set_eemem_value 
+{
+extraInput = ignore;
+out "eemem del \$1";
+in "";
+out "eemem add \$1 %s";
+in "";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
+}
+
+unprotect_eemem {
+extraInput = ignore;
+out "eemem unprotect";
+in "unprotectet";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
+}
+
+protect_eemem 
+{
+extraInput = ignore;
+out "eemem protect";
+in "";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
+}
+
+reload_eemem 
+{
+extraInput = ignore;
+out "read_config";
+in "Konfiguration aus EEPROM %*s";
+ReplyTimeout = 25000;
+ReadTimeout = 25000;
+}
