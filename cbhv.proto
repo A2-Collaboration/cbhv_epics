@@ -1,3 +1,21 @@
+# This file contains the protocols for the Crystal Ball High Voltage
+# Control used in the files 'cbhv_voltage.db', 'cbhv_eemem_nm.db',
+# 'cbhv_eemem_read.db' and 'cbhv_eemem_set.db'.
+
+# The definitions below are necessary to parse the voltage values for
+# individual channels. Parsing by ignoring a certain number of
+# chararcters and then looking for a number to get a specfic voltage
+# values does not work properly. For example when a channel's fuse is
+# broken, its value is 0,... - obviously this number has less
+# characters then the 4 digits value before the ',' that is used as a
+# standard. So when parsing a certain amount of numbers needs to be
+# skipped before the correct number appears. THe attempt was made to
+# put these definitions into the .sub file, but epics caused errors as
+# th strings got too long. Therefor they were placed directly in this
+# file. There may be a better way to do this, but for now it does the
+# trick and as it was important to get things going rather than other
+# things, this solution was used so far.
+
 l0ch1 = "%*d,%*f,%f";
 l0ch2 = "%*d,%*f,%*f,%f";
 l0ch3 = "%*d,%*f,%*f,%*f,%f";
@@ -38,6 +56,10 @@ l4ch5 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%
 l4ch6 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%f";
 l4ch7 = "%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%*f%*d,%*f,%*f,%*f,%*f,%*f,%*f,%*f,%f";
 
+# Below are some general definitions - take a look at the streamDevice
+# homepage for more
+# info. https://www.slac.stanford.edu/grp/cd/soft/epics/site/streamdevice/protocol.html
+
 OutTerminator = CR LF;
 InTerminator = ">";
 pollperiod = 1;
@@ -45,6 +67,13 @@ pollperiod = 1;
 LockTimeout = 300000;
 #WriteTimeout = 200000;
 extraInput = ignore;
+
+# There were some issues with getting the definitions from above into
+# the string that should be sent to the devices. The easiest though
+# not most effecient/ best methode was, to create a read command for
+# every channel. There are ways to reduce the amount of code but for
+# now this works. The protocols below are used by the 'ReadVolt' pvs
+# from 'cbhv_voltage.db'.
 
 read_voltagel0ch0
 {
@@ -246,6 +275,11 @@ read_voltagel4ch7
 in "%*d.%*d.%*d %*d:%*d:%*d%*2cZeit,Ebene,%*65c"$l4ch7;
 }
 
+# This protocol causes the boxes to send the table including all
+# voltage values. Though the input is not used, it is best to define
+# an in command as otherwise there comes some input from the box,
+# epics does not know what to do with.
+
 read_adc
 {
 out "read_adc csv";
@@ -253,6 +287,8 @@ in "%*#s";
 ReplyTimeout = 5000;
 ReadTimeout = 5000;
 }
+
+# Setting the voltages is done using this protocol.
 
 set_voltage 
 {
@@ -262,6 +298,9 @@ ReplyTimeout = 50000;
 ReadTimeout = 50000;
 }
 
+# Using this protocol the temperatures of the three sensors in box 1
+# are gathered.
+
 read_temp
 {
 out "READTEMP";
@@ -269,6 +308,10 @@ in "%*#s";
 ReplyTimeout = 50000;
 ReadTimeout = 50000;
 }
+
+# These protocols - like the readvoltage ones - are the ones used by
+# passive pvs searching for matching strings, so the temperature
+# values end up in the correct pvs.
 
 read_temp0
 {
@@ -286,6 +329,10 @@ in "           | Temperatur %*168c%7f%*#s";
 }
 
 ####################### read and write eemem values ########################
+
+# The following protocols are used to read and set the eemem.
+
+
 
 eemem_print
 {
@@ -309,6 +356,13 @@ in "\$1=%s";
 InTerminator = CR LF;
 extraInput = ignore;
 }
+
+# Taking the following protocol as an example, please note that though
+# it is basically an empty line - there is something the box is
+# sending back after each command. This has to be taken into account
+# as otherwise epics would not wait with sending the commands until
+# the prior one is finished. This would lead to unwanted behaviour as
+# the box then is gets several commands it cannot handle that fast.
 
 set_eemem_value_standalone 
 {
@@ -423,6 +477,10 @@ in "\$1\$2=%*f,%*f,%*f,%*f,%*f,%*f,%*f,%f";
 InTerminator = CR LF;
 extraInput = ignore;
 }
+
+# This protocol sets the M and N values. It takes the value stored in
+# the INP fields of the calling calcout record, concatinates them to
+# the needed string and writes them to the device.
 
 set_nmx
 {

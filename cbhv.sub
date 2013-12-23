@@ -1,3 +1,6 @@
+# This file contains the different patterns for the .db files of the
+# Crystal Ball high voltage control.
+
 file "cbhv_voltage.db" 
 {
 
